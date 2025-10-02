@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI BakeOff - Per Prompt Type</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .info-box {
+            background: #ebf4ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #4299e1;
+        }
+        
+        .prompt-selector {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            justify-content: center;
+        }
+        
+        .prompt-btn {
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+        
+        .prompt-btn:hover {
+            background: #f7fafc;
+            transform: translateY(-2px);
+        }
+        
+        .prompt-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .prompt-detail {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        
+        .prompt-detail.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .prompt-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .prompt-title {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+        
+        .prompt-count {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .rankings {
+            margin-top: 20px;
+        }
+        
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: #f7fafc;
+            border-radius: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .ranking-item:hover {
+            transform: translateX(5px);
+            background: #edf2f7;
+        }
+        
+        .rank {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #667eea;
+            min-width: 40px;
+        }
+        
+        .model {
+            flex: 1;
+            font-size: 1.1em;
+            color: #2d3748;
+            font-weight: 500;
+        }
+        
+        .bar-container {
+            flex: 2;
+            background: #e2e8f0;
+            border-radius: 5px;
+            height: 25px;
+            overflow: hidden;
+            margin: 0 15px;
+        }
+        
+        .bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: width 0.8s ease-out;
+        }
+        
+        .percentage {
+            min-width: 70px;
+            text-align: right;
+            color: #4a5568;
+            font-weight: bold;
+        }
+        
+        .medal {
+            font-size: 1.5em;
+            margin-right: 5px;
+        }
+        
+        .key-insights {
+            background: #fef3c7;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .key-insights h3 {
+            color: #78350f;
+            margin-bottom: 10px;
+        }
+        
+        .key-insights ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .key-insights li {
+            margin: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .key-insights li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #f59e0b;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏆 AI BakeOff - Resultaten per Prompt Type</h1>
+        <p class="subtitle">159 respondenten • 15 verschillende prompt types • 5 criteria per prompt</p>
+        
+        <div class="info-box">
+            <strong>📊 Hoe lezen?</strong> De percentages tonen hoe vaak een model gekozen werd van alle mogelijke keuzes binnen dat prompt type. 
+            Als alle modellen gelijk waren, zou elk model ~10% scoren (100% / 10 modellen).
+        </div>
+        
+        <div class="key-insights">
+            <h3>💡 Belangrijkste inzichten</h3>
+            <ul>
+                <li><strong>Claude domineert</strong> bij Technische Uitleg (18%), Ondernemerschap (14%) en Tone-of-Voice (16.7%)</li>
+                <li><strong>ChatGPT</strong> scoort het beste overall, maar verliest van Claude bij specifieke vakgebieden</li>
+                <li><strong>Gemini</strong> excelleert bij Data-analyse (13.3%) en Actuele Trends (20%)</li>
+                <li><strong>DeepSeek</strong> verrast bij Persona & Stijl (17.1%)</li>
+            </ul>
+        </div>
+        
+        <div class="prompt-selector" id="promptSelector"></div>
+        
+        <div id="promptDetails"></div>
+    </div>
+    
+    <script>
+        const promptData = {
+            "Strategie & Analyse": {
+                count: 32,
+                rankings: [
+                    { model: "ChatGPT", score: 18, percentage: 11.3 },
+                    { model: "Gemini", score: 17, percentage: 10.6 },
+                    { model: "DeepSeek", score: 15, percentage: 9.4 },
+                    { model: "Claude", score: 10, percentage: 6.3 },
+                    { model: "Perplexity", score: 10, percentage: 6.3 },
+                    { model: "Copilot", score: 9, percentage: 5.6 },
+                    { model: "Grok", score: 9, percentage: 5.6 }
+                ]
+            },
+            "Creativiteit & Copywriting": {
+                count: 31,
+                rankings: [
+                    { model: "ChatGPT", score: 22, percentage: 14.2 },
+                    { model: "DeepSeek", score: 16, percentage: 10.3 },
+                    { model: "Claude", score: 14, percentage: 9.0 },
+                    { model: "Copilot", score: 9, percentage: 5.8 },
+                    { model: "Pi", score: 9, percentage: 5.8 },
+                    { model: "Gemini", score: 6, percentage: 3.9 }
+                ]
+            },
+            "Ethisch Redeneren": {
+                count: 17,
+                rankings: [
+                    { model: "ChatGPT", score: 10, percentage: 11.8 },
+                    { model: "Perplexity", score: 8, percentage: 9.4 },
+                    { model: "DeepSeek", score: 7, percentage: 8.2 },
+                    { model: "Gemini", score: 7, percentage: 8.2 },
+                    { model: "Claude", score: 6, percentage: 7.1 }
+                ]
+            },
+            "Data-analyse & Advies": {
+                count: 12,
+                rankings: [
+                    { model: "Gemini", score: 8, percentage: 13.3 },
+                    { model: "ChatGPT", score: 7, percentage: 11.7 },
+                    { model: "Copilot", score: 4, percentage: 6.7 },
+                    { model: "Grok", score: 3, percentage: 5.0 },
+                    { model: "DeepSeek", score: 3, percentage: 5.0 }
+                ]
+            },
+            "Ondernemerschap & Toon": {
+                count: 10,
+                rankings: [
+                    { model: "Claude", score: 7, percentage: 14.0 },
+                    { model: "Gemini", score: 7, percentage: 14.0 },
+                    { model: "ChatGPT", score: 5, percentage: 10.0 },
+                    { model: "Copilot", score: 4, percentage: 8.0 }
+                ]
+            },
+            "Technische Uitleg": {
+                count: 10,
+                rankings: [
+                    { model: "Claude", score: 9, percentage: 18.0 },
+                    { model: "ChatGPT", score: 7, percentage: 14.0 },
+                    { model: "Gemini", score: 6, percentage: 12.0 },
+                    { model: "DeepSeek", score: 3, percentage: 6.0 }
+                ]
+            },
+            "Onderzoek & Nauwkeurigheid": {
+                count: 9,
+                rankings: [
+                    { model: "ChatGPT", score: 8, percentage: 17.8 },
+                    { model: "Grok", score: 6, percentage: 13.3 },
+                    { model: "Claude", score: 5, percentage: 11.1 },
+                    { model: "Copilot", score: 3, percentage: 6.7 }
+                ]
+            },
+            "Persona & Stijl": {
+                count: 7,
+                rankings: [
+                    { model: "DeepSeek", score: 6, percentage: 17.1 },
+                    { model: "Claude", score: 4, percentage: 11.4 },
+                    { model: "ChatGPT", score: 3, percentage: 8.6 },
+                    { model: "Mistral AI", score: 3, percentage: 8.6 }
+                ]
+            },
+            "Aanpassen van Tone-of-Voice": {
+                count: 6,
+                rankings: [
+                    { model: "Claude", score: 5, percentage: 16.7 },
+                    { model: "Gemini", score: 5, percentage: 16.7 },
+                    { model: "ChatGPT", score: 4, percentage: 13.3 },
+                    { model: "DeepSeek", score: 2, percentage: 6.7 }
+                ]
+            },
+            "Praktisch EU-advies": {
+                count: 6,
+                rankings: [
+                    { model: "Claude", score: 5, percentage: 16.7 },
+                    { model: "ChatGPT", score: 5, percentage: 16.7 },
+                    { model: "DeepSeek", score: 3, percentage: 10.0 }
+                ]
+            },
+            "Creativiteit & Actuele Trends": {
+                count: 6,
+                rankings: [
+                    { model: "Gemini", score: 6, percentage: 20.0 },
+                    { model: "DeepSeek", score: 5, percentage: 16.7 },
+                    { model: "ChatGPT", score: 3, percentage: 10.0 }
+                ]
+            },
+            "Real-time Kennis": {
+                count: 5,
+                rankings: [
+                    { model: "ChatGPT", score: 5, percentage: 20.0 },
+                    { model: "Gemini", score: 4, percentage: 16.0 },
+                    { model: "Meta AI", score: 2, percentage: 8.0 },
+                    { model: "Claude", score: 2, percentage: 8.0 }
+                ]
+            }
+        };
+        
+        const selector = document.getElementById('promptSelector');
+        const details = document.getElementById('promptDetails');
+        
+        // Sorteer prompt types op aantal respondenten
+        const sortedPrompts = Object.entries(promptData).sort((a, b) => b[1].count - a[1].count);
+        
+        // Maak buttons
+        sortedPrompts.forEach(([promptType, data], index) => {
+            const btn = document.createElement('button');
+            btn.className = 'prompt-btn';
+            if (index === 0) btn.classList.add('active');
+            btn.textContent = `${promptType} (${data.count})`;
+            btn.onclick = () => showPrompt(promptType);
+            selector.appendChild(btn);
+        });
+        
+        // Maak detail secties
+        sortedPrompts.forEach(([promptType, data], index) => {
+            const section = document.createElement('div');
+            section.className = 'prompt-detail';
+            section.id = `prompt-${promptType.replace(/\s+/g, '-')}`;
+            if (index === 0) section.classList.add('active');
+            
+            const maxPercentage = Math.max(...data.rankings.map(r => r.percentage));
+            
+            section.innerHTML = `
+                <div class="prompt-header">
+                    <div class="prompt-title">${promptType}</div>
+                    <div class="prompt-count">${data.count} respondenten • ${data.count * 5} evaluatiemomenten</div>
+                </div>
+                <div class="rankings">
+                    ${data.rankings.map((item, idx) => {
+                        const widthPercent = (item.percentage / maxPercentage) * 100;
+                        const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : '';
+                        return `
+                            <div class="ranking-item">
+                                <div class="rank">${medal}${idx + 1}</div>
+                                <div class="model">${item.model}</div>
+                                <div class="bar-container">
+                                    <div class="bar-fill" style="width: ${widthPercent}%">${item.score}</div>
+                                </div>
+                                <div class="percentage">${item.percentage.toFixed(1)}%</div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+            
+            details.appendChild(section);
+        });
+        
+        function showPrompt(promptType) {
+            // Update buttons
+            document.querySelectorAll('.prompt-btn').forEach(btn => {
+                if (btn.textContent.startsWith(promptType)) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Update details
+            document.querySelectorAll('.prompt-detail').forEach(section => {
+                if (section.id === `prompt-${promptType.replace(/\s+/g, '-')}`) {
+                    section.classList.add('active');
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
