@@ -1,10 +1,6 @@
----
-title: "AI for Business – Resultaten & Experimenten"
-description: "Een overzicht van onze testresultaten, AI-vergelijkingen en klasexperimenten."
----
+# AI for Business
 
-Welkom bij onze **AI for Business** repository!  
-*Deze pagina is gemaakt door studenten van AI for Business als onderdeel van onze ontdekkingsreis in generatieve AI.*
+Deze repo bevat interactieve HTML-bestanden met de resultaten van onze experimenten, vergelijkingen van taalmodellen en AI-tools die we in de klas hebben getest.
 
-- [AI Bake Off - vergelijking taalmodellen](ai-bakeoff.html)
-- [AI Tools database ](ai-tools-database.html)
+Bekijk de interactieve webpagina via 
+[**GitHub Pages**](https://elkeboonen.github.io/AfB/)
