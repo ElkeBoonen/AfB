@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studentenbevindingen: AI Data Analyses</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .icon {
+            font-size: 1.2em;
+        }
+        
+        .finding-card {
+            background: #f8f9fa;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+        }
+        
+        .finding-card:hover {
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .finding-card h3 {
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .finding-card p {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #ffd89b 0%, #19547b 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin: 5px 5px 5px 0;
+        }
+        
+        .tag-red {
+            background: #dc3545;
+        }
+        
+        .tag-green {
+            background: #28a745;
+        }
+        
+        .insight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .insight-box h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .insight-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .insight-box li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .insight-box li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .warning-box h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .data-viz {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .viz-card {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .viz-number {
+            font-size: 3em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .viz-label {
+            font-size: 1.1em;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎓 AI Data Analyses: Wat hebben studenten geleerd?</h1>
+            <p>Analyse van 165 studentenonderzoeken + 3 lesweken data (576 studenten)</p>
+        </header>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <span class="stat-number">165</span>
+                <span class="stat-label">Studenten hebben de data geanalyseerd</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">187→198</span>
+                <span class="stat-label">Stijgende aanwezigheid over 3 lessen</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">148</span>
+                <span class="stat-label">Biases geïdentificeerd</span>
+            </div>
+        </div>
+        
+        <div class="content">
+            
+            <!-- Belangrijkste Les-Data Bevindingen -->
+            <div class="insight-box">
+                <h3>📈 Belangrijkste Bevindingen uit Les-Data</h3>
+                <ul>
+                    <li><strong>Stijgende aanwezigheid:</strong> Les 2 (187) → Les 3 (191) → Les 4 (198) studenten</li>
+                    <li><strong>81% denkt dat ChatGPT "General AI" is</strong> - massaal misverstand over AI-types</li>
+                    <li><strong>45,5% begreep niet waarom "een AI" misleidend is</strong> - fundamenteel concept onduidelijk</li>
+                    <li><strong>30% lege antwoorden</strong> - significant deel studenten niet betrokken bij alle vragen</li>
+                    <li><strong>Data-analyse vaardigheden variëren enorm</strong> - van oppervlakkig tot zeer grondig</li>
+                </ul>
+            </div>
+
+            <!-- Les Data Inzichten -->
+            <section class="section">
+                <h2 class="section-title"><span class="icon">📊</span> Concrete Inzichten uit Les-Data</h2>
+                
+                <div class="finding-card">
+                    <h3>Les 2: AI Fundamentals - Veel misconcepties</h3>
+                    <div class="data-viz">
+                        <div class="viz-card">
+                            <div class="viz-number">81%</div>
+                            <div class="viz-label">Dacht dat ChatGPT <strong>General AI</strong> is</div>
+                        </div>
+                        <div class="viz-card">
+                            <div class="viz-number">45,5%</div>
+                            <div class="viz-label">Fout bij vraag over AI-definitie</div>
+                        </div>
+                        <div class="viz-card">
+                            <div class="viz-number">30%</div>
+                            <div class="viz-label">Van alle antwoorden was leeg (/)</div>
+                        </div>
+                    </div>
+                    <p><strong>Belangrijkste valkuil:</strong> Het fundamentele verschil tussen narrow/specialized AI en general AI wordt niet begrepen. ChatGPT is <em>specialized</em> generative AI, geen general AI die elke menselijke taak kan uitvoeren.</p>
+                    <span class="tag tag-red">Kritisch</span>
+                </div>
+
+                <div class="finding-card">
+                    <h3>Les 3: Generatieve AI & Prompting</h3>
+                    <p>Focus op hoe generatieve AI werkt, pre-training, knowledge cutoff, en prompt engineering. Studenten oefenden met het maken van prompts voor afbeeldingen, social media posts en dagplanningen.</p>
+                    <span class="tag">Praktisch</span>
+                </div>
+
+                <div class="finding-card">
+                    <h3>Les 4: Onderzoek met AI - Kritisch denken</h3>
+                    <p>Studenten leerden goede onderzoeksvragen formuleren rond "mentaal welzijn en sociale media". Ze moesten slechte onderzoeksvragen herkennen (te breed, ja/nee vragen, geen relatie) en tools zoals Elicit, Perplexity en NotebookLM gebruiken.</p>
+                    <div style="margin-top: 15px;">
+                        <strong>Veelvoorkomende fouten in onderzoeksvragen:</strong>
+                        <ul style="margin-left: 20px; margin-top: 10px;">
+                            <li>Te breed geformuleerd</li>
+                            <li>Ja/nee vragen zonder nuance</li>
+                            <li>Geen causale relatie tussen variabelen</li>
+                            <li>Te veel variabelen in één vraag</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    <h4>⚠️ Waarschuwing: Interpretatie vs. Feiten</h4>
+                    <p>Meerdere studenten schreven over "dalende aanwezigheid na week 5-6", maar de daadwerkelijke les-data toont een <strong>stijgende trend</strong>. Dit illustreert het belang van kritisch denken en data-verificatie - neem conclusies niet klakkeloos over!</p>
+                </div>
+            </section>
+            
+            <!-- AI-tools bevindingen uit studentenanalyses -->
+            <section class="section">
+                <h2 class="section-title"><span class="icon">🤖</span> AI-tools: Wat vonden studenten?</h2>
+                
+                <div class="finding-card">
+                    <h3>ChatGPT dominantie & merkbekendheid</h3>
+                    <p>ChatGPT scoorde het meest consistent hoog in alle categorieën. Ook Gemini, DeepSeek en Claude werden vaak als sterke modellen genoemd, maar geen zo vaak als ChatGPT. Dit wijst op <span class="highlight">populariteitsbias</span>.</p>
+                    <span class="tag">Populariteit</span>
+                    <span class="tag">Confirmation bias</span>
+                </div>
+                
+                <div class="finding-card">
+                    <h3>Specialisatie per model</h3>
+                    <p><strong>Claude:</strong> technische uitleg, ondernemerschap, tone-of-voice<br>
+                    <strong>Gemini:</strong> data-analyse, actuele trends<br>
+                    <strong>Perplexity & Copilot:</strong> creatieve prompts<br>
+                    <strong>ChatGPT:</strong> sterkst overall maar verloor van Claude in specifieke vakgebieden</p>
+                </div>
+                
+                <div class="finding-card">
+                    <h3>Ondervertegenwoordigde modellen</h3>
+                    <p>Nieuwere modellen zoals Pi, Meta AI en Mistral AI worden zelden genoemd. <strong>Mistral AI</strong> werd wel opvallend vaak genoemd bij creativiteit door enkele enthousiaste gebruikers.</p>
+                </div>
+            </section>
+            
+            <!-- Biases - Top 5 -->
+            <section class="section">
+                <h2 class="section-title"><span class="icon">⚠️</span> Top 5 Geïdentificeerde Biases</h2>
+                
+                <div class="finding-card">
+                    <h3>1. Populariteitsbias / Merkbekendheid ⭐</h3>
+                    <p>Bekende AI-modellen zoals ChatGPT worden vaker gekozen, waardoor nieuwere of minder bekende modellen ondervertegenwoordigd zijn. Er bestaat een confirmation bias tegenover ChatGPT omdat dit onder studenten de bekendste LLM is.</p>
+                    <span class="tag">Meest voorkomend</span>
+                </div>
+                
+                <div class="finding-card">
+                    <h3>2. Self-selection bias</h3>
+                    <p>Gemotiveerde studenten nemen vaker deel én halen hogere cijfers. Dit lijkt op een verband tussen participatie en prestaties, maar dit hoeft niet causaal te zijn.</p>
+                </div>
+                
+                <div class="finding-card">
+                    <h3>3. Selectiebias / Representativiteitsbias</h3>
+                    <p>Alleen studenten die geregistreerd staan in Canvas of hun aanwezigheid registreren, komen in de dataset. De resultaten zijn niet representatief voor de gehele studentenpopulatie.</p>
+                </div>
+                
+                <div class="finding-card">
+                    <h3>4. Meetbias</h3>
+                    <p>"Tijd in Canvas" meet alleen inlogtijd, niet daadwerkelijke studieactiviteit. Sommige studenten laten Canvas openstaan, waardoor hun tijd kunstmatig hoog is (outlier: 23u47).</p>
+                </div>
+                
+                <div class="finding-card">
+                    <h3>5. Responsbias</h3>
+                    <p>Sommige studenten gaven oppervlakkige antwoorden ("/"), wat wijst op lage betrokkenheid. Ook positiviteitsbias: studenten zagen AI vooral als nuttig en waren weinig kritisch.</p>
+                </div>
+            </section>
+            
+            <!-- Interessante Outliers -->
+            <section class="section">
+                <h2 class="section-title"><span class="icon">🔍</span> Interessante Outliers</h2>
+                
+                <div class="finding-card">
+                    <h3>Student met 23u47 Canvas-tijd</h3>
+                    <p>Deze student had Canvas waarschijnlijk de hele dag opengelaten. Uitgesloten van gemiddelde-berekeningen omdat niet representatief voor normaal gebruik.</p>
+                    <span class="tag">Meetbias</span>
+                </div>
+                
+                <div class="finding-card">
+                    <h3>0% participatie, maar 9.0 cijfer</h3>
+                    <p>Student met extreem lage participatie behaalde toch hoog eindcijfer. Mogelijk zelfstandig gestudeerd of vrijstelling. Toont aan dat correlatie ≠ causatie.</p>
+                    <span class="tag">Waardevol datapunt</span>
+                </div>
+                
+                <div class="finding-card">
+                    <h3>"AI mag badminton spelen"</h3>
+                    <p>Bij vraag wat AI mag doen in onderzoek. Waarschijnlijk grap of misverstand. Uitgesloten bij inhoudsanalyse maar illustreert het belang van data-opschoning.</p>
+                </div>
+                
+                <div class="finding-card">
+                    <h3>Claude's uitzonderlijke score bij technische uitleg</h3>
+                    <p>Claude presteerde significant beter dan andere modellen op technische prompts. Dit illustreert dat verschillende AI-modellen verschillende sterktes hebben.</p>
+                </div>
+            </section>
+            
+            <!-- Ethische Overwegingen -->
+            <section class="section">
+                <h2 class="section-title"><span class="icon">🔐</span> Ethische Overwegingen</h2>
+                
+                <div class="finding-card">
+                    <h3>Privacy & Anonimiteit</h3>
+                    <p>Studentgegevens (student-ID's) moeten worden geanonimiseerd. </p>
+                    <span class="tag tag-red">Kritisch</span>
+                </div>
+                
+                <div class="finding-card">
+                    <h3>Representativiteit & Context</h3>
+                    <p>Data over Canvas-activiteit zegt iets over gedrag in het systeem, maar niet noodzakelijk over leerprestaties, motivatie of andere contextuele factoren. <strong>Voorzichtig zijn met interpretaties.</strong></p>
+                </div>
+                
+                <div class="finding-card">
+                    <h3>Bias in conclusies</h3>
+                    <p>Data mogen niet leiden tot bevooroordeelde conclusies over intelligentie, motivatie of capaciteiten van studenten. Canvas-tijd ≠ leerprestatie.</p>
+                </div>
+            </section>
+            
+            <!-- Data Kwaliteit -->
+            <section class="section">
+                <h2 class="section-title"><span class="icon">🔧</span> Data Kwaliteit</h2>
+                
+                <div class="finding-card">
+                    <h3>Missing values & lege antwoorden</h3>
+                    <p><strong>30% van alle antwoorden in Les 2 was leeg ("/")</strong>. Dit wijst op een significant deel studenten dat niet alle vragen beantwoordde. Sommige studenten vulden alleen meerkeuzevragen in, niet de open vragen.</p>
+                </div>
+                
+                <div class="finding-card">
+                    <h3>Foutieve data</h3>
+                    <p>Voorbeelden: participatiescores >100%, tijdsnotaties met meerdere dagen gecombineerd ("2 9:29:00"). Deze werden gecorrigeerd of verwijderd.</p>
+                </div>
+                
+                <div class="finding-card">
+                    <h3>Inconsistentie in antwoorden</h3>
+                    <p>Sommige studenten kozen steeds dezelfde drie AI-modellen bij alle categorieën (bijv. altijd ChatGPT, Claude en DeepSeek), wat wijst op mogelijk niet-kritische evaluatie.</p>
+                </div>
+            </section>
+            
+            <!-- Lessen & Onderzoeksvragen -->
+            <section class="section">
+                <h2 class="section-title"><span class="icon">💡</span> Wat kunnen we leren?</h2>
+                
+                <div class="insight-box">
+                    <h3>🎯 Belangrijkste Lessen</h3>
+                    <ul>
+                        <li><strong>Verifieer altijd de brondata:</strong> Studenten schreven over trends die niet in de echte data zitten</li>
+                        <li><strong>Fundamentele AI-concepten zijn onduidelijk:</strong> 81% denkt dat ChatGPT General AI is</li>
+                        <li><strong>Kritisch denken moet worden versterkt:</strong> Veel analyses blijven oppervlakkig</li>
+                        <li><strong>Bewustzijn van bias is toegenomen:</strong> Studenten identificeren correct populariteitsbias en selectiebias</li>
+                        <li><strong>Ethiek wordt serieus genomen:</strong> Privacy en representativiteit worden veelvuldig genoemd</li>
+                        <li><strong>30% niet-betrokkenheid:</strong> Significant deel studenten vult niet alle vragen in</li>
+                    </ul>
+                </div>
+                
+               
+            </section>
+            
+           
+        </div>
+        
+        <footer>
+            <p><strong>Data:</strong> 165 studentenanalyses + Les 2, 3, 4 data (576 unieke datapunten)</p>
+            <p style="margin-top: 10px; font-size: 0.9em;"><strong>Belangrijke les:</strong> Vertrouw niet blind op conclusies - verifieer altijd met de brondata! 🔍</p>
+        </footer>
+    </div>
+</body>
+</html>
