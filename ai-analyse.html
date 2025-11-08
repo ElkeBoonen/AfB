@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Kansen Analyse per Opleiding</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .intro {
+            padding: 40px;
+            background: #f8f9fa;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .intro h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .label {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .ranking {
+            padding: 40px;
+            background: white;
+        }
+        
+        .ranking h2 {
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+            text-align: center;
+        }
+        
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .ranking-item:hover {
+            background: #e9ecef;
+            transform: translateX(10px);
+        }
+        
+        .rank-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+            min-width: 60px;
+        }
+        
+        .rank-content {
+            flex: 1;
+        }
+        
+        .rank-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .rank-score {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .score-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .opleiding-detail {
+            padding: 40px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .opleiding-detail:last-child {
+            border-bottom: none;
+        }
+        
+        .opleiding-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .opleiding-title {
+            font-size: 2em;
+            color: #667eea;
+        }
+        
+        .opleiding-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .analysis-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .analysis-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .badge-high {
+            background: #28a745;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            display: inline-block;
+            margin: 5px 5px 5px 0;
+        }
+        
+        .badge-medium {
+            background: #ffc107;
+            color: #333;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            display: inline-block;
+            margin: 5px 5px 5px 0;
+        }
+        
+        .badge-low {
+            background: #dc3545;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            display: inline-block;
+            margin: 5px 5px 5px 0;
+        }
+        
+        .pie-chart {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .pie-segment {
+            display: flex;
+            align-items: center;
+            margin: 10px 20px;
+        }
+        
+        .pie-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .color-high { background: #28a745; }
+        .color-medium { background: #ffc107; }
+        .color-low { background: #dc3545; }
+        
+        .task-list {
+            list-style: none;
+        }
+        
+        .task-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .task-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .task-list li::before {
+            content: "→";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .frustrations {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #ffc107;
+            margin-bottom: 25px;
+        }
+        
+        .frustrations h3 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+        
+        .frustrations ul {
+            list-style: none;
+        }
+        
+        .frustrations li {
+            padding: 8px 0;
+            color: #856404;
+        }
+        
+        .frustrations li::before {
+            content: "⚠️";
+            margin-right: 10px;
+        }
+        
+        .insights-box {
+            background: #d1ecf1;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #17a2b8;
+            margin: 25px 0;
+        }
+        
+        .insights-box h3 {
+            color: #0c5460;
+            margin-bottom: 15px;
+        }
+        
+        .insights-box p {
+            color: #0c5460;
+            line-height: 1.8;
+        }
+        
+        .time-distribution {
+            display: flex;
+            height: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .time-auto {
+            background: #28a745;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .time-aug {
+            background: #ffc107;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .time-auth {
+            background: #dc3545;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+        }
+        
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            
+            .analysis-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 AI Kansen Analyse</h1>
+            <p>Uitgebreide analyse per opleiding: waar liggen de AI-kansen?</p>
+        </header>
+        
+        <div class="intro">
+            <h2>Over deze analyse</h2>
+            <p>Deze analyse is gebaseerd op input van <strong>186 studenten</strong> uit <strong>10 verschillende opleidingen</strong>. Elke student heeft hun taken, frustraties en mogelijke AI-toepassingen binnen hun vakgebied beschreven. De resultaten zijn geanalyseerd op drie niveaus:</p>
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #28a745;"></div>
+                    <div><strong>AUTOMATISATIE</strong> - AI kan deze taken volledig overnemen</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ffc107;"></div>
+                    <div><strong>AUGMENTATIE</strong> - AI ondersteunt en verbetert menselijk werk</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #dc3545;"></div>
+                    <div><strong>AUTHENTICITEIT</strong> - Blijft essentieel menselijk werk</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="number">186</div>
+                <div class="label">Studenten</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">10</div>
+                <div class="label">Opleidingen</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">477</div>
+                <div class="label">Taken Geanalyseerd</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">38</div>
+                <div class="label">Taken voor Automatisatie</div>
+            </div>
+        </div>
+        
+        <div class="ranking">
+            <h2>🏆 Ranking: AI Opportunity Score</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: #666;">
+                Deze score combineert het percentage taken geschikt voor automatisatie en augmentatie, gewogen met de tijd die eraan besteed wordt.
+            </p>
+            
+            <div class="ranking-item">
+                <div class="rank-number">1</div>
+                <div class="rank-content">
+                    <div class="rank-title">Accountancy-Fiscaliteit</div>
+                    <div class="rank-score">13 studenten • AI Opportunity Score: 220.5</div>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: 100%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ranking-item">
+                <div class="rank-number">2</div>
+                <div class="rank-content">
+                    <div class="rank-title">Immobiliën en Verzekeringen</div>
+                    <div class="rank-score">17 studenten • AI Opportunity Score: 197.7</div>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: 89.6%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ranking-item">
+                <div class="rank-number">3</div>
+                <div class="rank-content">
+                    <div class="rank-title">Marketing</div>
+                    <div class="rank-score">36 studenten • AI Opportunity Score: 163.1</div>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: 74%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ranking-item">
+                <div class="rank-number">4</div>
+                <div class="rank-content">
+                    <div class="rank-title">Internationaal Ondernemen</div>
+                    <div class="rank-score">32 studenten • AI Opportunity Score: 160.0</div>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: 72.6%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ranking-item">
+                <div class="rank-number">5</div>
+                <div class="rank-content">
+                    <div class="rank-title">Supply Chain Management</div>
+                    <div class="rank-score">16 studenten • AI Opportunity Score: 156.3</div>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: 70.9%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ranking-item">
+                <div class="rank-number">6</div>
+                <div class="rank-content">
+                    <div class="rank-title">Applied Data Intelligence</div>
+                    <div class="rank-score">14 studenten • AI Opportunity Score: 139.4</div>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: 63.2%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ranking-item">
+                <div class="rank-number">7</div>
+                <div class="rank-content">
+                    <div class="rank-title">Business en Management</div>
+                    <div class="rank-score">42 studenten • AI Opportunity Score: 133.4</div>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: 60.5%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ranking-item">
+                <div class="rank-number">8</div>
+                <div class="rank-content">
+                    <div class="rank-title">Financiën en Verzekeringen</div>
+                    <div class="rank-score">8 studenten • AI Opportunity Score: 126.5</div>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: 57.4%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ranking-item">
+                <div class="rank-number">9</div>
+                <div class="rank-content">
+                    <div class="rank-title">Automotive Management</div>
+                    <div class="rank-score">7 studenten • AI Opportunity Score: 97.8</div>
+                    <div class="score-bar">
+                        <div class="score-fill" style="width: 44.4%;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="details">
+            <!-- Details per opleiding worden hier dynamisch toegevoegd -->
+        </div>
+        
+        <footer>
+            <p>© 2024 AI Kansen Analyse | Gebaseerd op 186 student responses</p>
+        </footer>
+    </div>
+
+    <script>
+        // Data per opleiding
+        const opleidingData = {
+            "Accountancy-Fiscaliteit": {
+                studenten: 13,
+                aiScore: 220.5,
+                pctHoog: 46.2,
+                pctMedium: 53.8,
+                pctLaag: 0,
+                tijdAuto: 310,
+                tijdAug: 350,
+                tijdAuth: 0,
+                frustraties: [
+                    "Veel administratie en tijdrovende taken",
+                    "Complexe regelgeving die constant verandert",
+                    "Deadlines en tijdsdruk rond fiscale aangiften",
+                    "Repetitief werk zoals dataverwerking",
+                    "Fouten kunnen grote financiële gevolgen hebben"
+                ],
+                voorbeeldenHoog: [
+                    "Facturen verwerken en registreren",
+                    "Btw-aangiften voorbereiden",
+                    "Gegevens invoeren in boekhoudsoftware",
+                    "Standaard belastingberekeningen uitvoeren",
+                    "Financiële rapporten genereren"
+                ],
+                voorbeeldenMedium: [
+                    "Financiële analyses maken",
+                    "Advies geven over fiscale optimalisatie",
+                    "Klantdossiers controleren op fouten",
+                    "Budgettering en forecasting",
+                    "Communicatie met klanten over fiscale zaken"
+                ],
+                voorbeeldenLaag: [],
+                insights: "Accountancy en Fiscaliteit scoort het hoogst op AI-kansen! Dit komt vooral door de grote hoeveelheid repetitief werk zoals dataverwerking, factuurverwerking en standaard aangiften. AI kan hier enorm veel tijd besparen. De grootste frustraties (veel administratie, tijdrovend werk) zijn precies de taken waar AI het meest kan helpen. De complexe regelgeving en strategisch advies blijven wel menselijk werk, wat perfect is - AI neemt het saaie werk over zodat professionals zich kunnen focussen op strategisch denken en klantrelaties."
+            },
+            "Immobiliën en Verzekeringen": {
+                studenten: 17,
+                aiScore: 197.7,
+                pctHoog: 41.2,
+                pctMedium: 47.1,
+                pctLaag: 11.8,
+                tijdAuto: 200,
+                tijdAug: 180,
+                tijdAuth: 60,
+                frustraties: [
+                    "Veel administratief werk en papierwerk",
+                    "Langdurige procedures en goedkeuringen",
+                    "Complexe regelgeving en wetgeving",
+                    "Tijdrovende bezichtigingen en taxaties",
+                    "Klantcommunicatie over verwachtingen"
+                ],
+                voorbeeldenHoog: [
+                    "Vastgoedgegevens invoeren en bijwerken",
+                    "Offertes en polissen opstellen",
+                    "Documentatie voorbereiden",
+                    "Standaard e-mails en follow-ups",
+                    "Data-analyses van marktprijzen",
+                    "Agenda's beheren en afspraken plannen",
+                    "Berekeningen maken voor verzekeringspremies"
+                ],
+                voorbeeldenMedium: [
+                    "Risicoanalyses uitvoeren",
+                    "Klantenadvisering over producten",
+                    "Vastgoedwaarderingen beoordelen",
+                    "Contracten opstellen en controleren",
+                    "Marktonderzoek doen",
+                    "Claims beoordelen en verwerken",
+                    "Communicatie met klanten",
+                    "Onderhandelingen voeren"
+                ],
+                voorbeeldenLaag: [
+                    "Bezichtigingen uitvoeren",
+                    "Persoonlijk klantcontact en vertrouwen opbouwen"
+                ],
+                insights: "Immobiliën en Verzekeringen heeft enorme AI-potentie, met name in administratieve processen en dataverwerking. De sector worstelt met veel papierwerk en tijdrovende procedures - precies waar AI uitblinkt. Denk aan het automatisch genereren van offertes, polissen, en documentatie, of het analyseren van marktdata voor prijszetting. Bezichtigingen en persoonlijk klantcontact blijven authentiek menselijk werk, maar AI kan professionals enorm helpen met voorbereiding en follow-up. Grote kans: automatiseer het administratieve werk zodat adviseurs meer tijd hebben voor de menselijke kant van het werk."
+            },
+            "Marketing": {
+                studenten: 36,
+                aiScore: 163.1,
+                pctHoog: 12.9,
+                pctMedium: 77.4,
+                pctLaag: 9.7,
+                tijdAuto: 60,
+                tijdAug: 625,
+                tijdAuth: 0,
+                frustraties: [
+                    "Creativiteit combineren met data en metrics",
+                    "Constant veranderende trends en algoritmes",
+                    "Druk om steeds nieuwe content te creëren",
+                    "ROI en resultaten moeten aantoonbaar zijn",
+                    "Balans tussen creativiteit en commerciële doelen",
+                    "Tijdsdruk bij campagnes en deadlines"
+                ],
+                voorbeeldenHoog: [
+                    "Social media posts plannen",
+                    "Data-analyses van campagnes",
+                    "Repetitieve content herformatteren",
+                    "Basis SEO optimalisaties"
+                ],
+                voorbeeldenMedium: [
+                    "Content creatie en copywriting",
+                    "Social media strategie ontwikkelen",
+                    "Marktonderzoek uitvoeren",
+                    "Campagnes opzetten en monitoren",
+                    "Doelgroepanalyses maken",
+                    "A/B testing uitvoeren",
+                    "Visuele content creëren",
+                    "Performance rapportages maken",
+                    "Trend analyses",
+                    "Email marketing campagnes",
+                    "Influencer research",
+                    "Contentkalenders beheren",
+                    "Klantpersona's ontwikkelen",
+                    "Concurrentieanalyses",
+                    "Keyword research",
+                    "Budget allocatie",
+                    "Community management",
+                    "Website analytics interpreteren",
+                    "Brand guidelines toepassen",
+                    "Advertentieteksten schrijven",
+                    "Grafisch ontwerp feedback geven",
+                    "Campagne briefings maken",
+                    "Partnerships onderzoeken",
+                    "Conversion optimalisatie"
+                ],
+                voorbeeldenLaag: [
+                    "Creatieve concepten bedenken",
+                    "Brand identiteit ontwikkelen",
+                    "Strategische beslissingen nemen"
+                ],
+                insights: "Marketing scoort hoog op AI-augmentatie! Het vakgebied is bij uitstek geschikt voor AI-ondersteuning: denk aan het genereren van content variaties, het analyseren van campagne data, het voorspellen van trends, en het optimaliseren van targeting. De grote frustratie - constant nieuwe content moeten maken - is precies waar AI kan helpen met inspiratie, variaties en snelheid. Het creatieve kernwerk en strategische denken blijven authentiek menselijk. Grootste kans: gebruik AI als creative partner die het uitvoerende werk versnelt, zodat marketeers zich kunnen focussen op strategie en authentieke verhalen."
+            },
+            "Internationaal Ondernemen": {
+                studenten: 32,
+                aiScore: 160.0,
+                pctHoog: 28.6,
+                pctMedium: 57.1,
+                pctLaag: 14.3,
+                tijdAuto: 80,
+                tijdAug: 320,
+                tijdAuth: 50,
+                frustraties: [
+                    "Culturele verschillen navigeren",
+                    "Complexe internationale regelgeving",
+                    "Tijdszones en communicatie coördineren",
+                    "Wisselkoersrisico's beheren",
+                    "Gebrek aan controle over externe factoren",
+                    "Taalbarrières in zakelijke communicatie"
+                ],
+                voorbeeldenHoog: [
+                    "Marktdata verzamelen en analyseren",
+                    "Exportdocumentatie opstellen",
+                    "Vertaalwerk voor standaard documenten",
+                    "Planning en scheduling",
+                    "Rapporten genereren",
+                    "Database beheer"
+                ],
+                voorbeeldenMedium: [
+                    "Marktonderzoek uitvoeren",
+                    "Business cases ontwikkelen",
+                    "Strategische planning",
+                    "Contracten opstellen",
+                    "Risicoanalyses maken",
+                    "Leverancierselectie",
+                    "Budgetbeheer",
+                    "Kwaliteitscontroles",
+                    "Compliance monitoring",
+                    "Project coördinatie",
+                    "Presentaties voorbereiden",
+                    "Stakeholder communicatie"
+                ],
+                voorbeeldenLaag: [
+                    "Internationale onderhandelingen",
+                    "Netwerken en relaties opbouwen",
+                    "Cultuurspecifieke advisering"
+                ],
+                insights: "Internationaal Ondernemen heeft sterk AI-potentieel vooral in operationele en analytische taken. Documentverwerking, marktanalyses en planning kunnen grotendeels geautomatiseerd worden. De echte frustraties - culturele verschillen, taalbarrières, gebrek aan controle - kunnen door AI ondersteund worden met vertaling, culturele insights en risicoanalyses. Het strategische en relationele werk (onderhandelen, netwerken) blijft essentieel menselijk. Grootste kans: gebruik AI voor operationele efficiëntie en marktinzichten, zodat professionals zich kunnen focussen op de menselijke kant van internationale business."
+            },
+            "Supply Chain Management": {
+                studenten: 16,
+                aiScore: 156.3,
+                pctHoog: 20.0,
+                pctMedium: 60.0,
+                pctLaag: 20.0,
+                tijdAuto: 95,
+                tijdAug: 183,
+                tijdAuth: 80,
+                frustraties: [
+                    "Onverwachte verstoringen in de keten",
+                    "Coördinatie tussen verschillende partijen",
+                    "Voorraadoptimalisatie is complex",
+                    "Tijdsdruk bij leveringen",
+                    "Communicatie met leveranciers wereldwijd",
+                    "Kostenbeheersing vs serviceniveau"
+                ],
+                voorbeeldenHoog: [
+                    "Voorraadbeheer en tracking",
+                    "Order processing",
+                    "Data-analyses van leveringen"
+                ],
+                voorbeeldenMedium: [
+                    "Planning en forecasting",
+                    "Leveranciersanalyses",
+                    "Route optimalisatie",
+                    "Performance monitoring",
+                    "Risicobeheer",
+                    "Demand planning",
+                    "Kostenanalyses",
+                    "Rapportages maken",
+                    "Procesoptimalisatie"
+                ],
+                voorbeeldenLaag: [
+                    "Onderhandelingen met leveranciers",
+                    "Crisis management",
+                    "Relatiebeheer"
+                ],
+                insights: "Supply Chain Management heeft groot AI-potentieel in optimalisatie en voorspelling. De sector kampt met complexiteit in voorraad-, planning- en routebeheer - precies waar AI met machine learning uitblinkt. Denk aan voorspellende analyses voor demand, automatische herbestelling, optimale routeplanning, en early warning systemen voor verstoringen. Het menselijke element blijft cruciaal bij onderhandelingen, crisisbeheersing en relatiebeheer. Grootste kans: AI kan de supply chain veel voorspelbaarder en efficiënter maken, waardoor professionals proactief kunnen handelen in plaats van reactief."
+            },
+            "Applied Data Intelligence": {
+                studenten: 14,
+                aiScore: 139.4,
+                pctHoog: 18.2,
+                pctMedium: 63.6,
+                pctLaag: 18.2,
+                tijdAuto: 45,
+                tijdAug: 240,
+                tijdAuth: 70,
+                frustraties: [
+                    "Data cleaning is tijdrovend",
+                    "Stakeholders begrijpen data-inzichten vaak niet",
+                    "Technische complexiteit vs business requirements",
+                    "Data privacy en security concerns",
+                    "Constant nieuwe tools en technieken leren"
+                ],
+                voorbeeldenHoog: [
+                    "Data cleaning en preprocessing",
+                    "Standaard ETL processen"
+                ],
+                voorbeeldenMedium: [
+                    "Data analyses uitvoeren",
+                    "Dashboards bouwen",
+                    "Machine learning modellen ontwikkelen",
+                    "Statistische analyses",
+                    "Visualisaties creëren",
+                    "Rapportages automatiseren",
+                    "Data pipelines opzetten"
+                ],
+                voorbeeldenLaag: [
+                    "Stakeholder consultatie",
+                    "Vertaling business naar techniek"
+                ],
+                insights: "Interessant: Applied Data Intelligence studenten zien relatief minder automatisatie kansen, meer augmentatie. Dit komt omdat hun werk al technisch is - AI wordt gezien als tool die hun capabilities vergroot, niet vervangt. De grootste frustratie (data cleaning) kan inderdaad geautomatiseerd. Maar het echte werk - modellen bouwen, analyses interpreteren, businesswaarde creëren - blijft menselijke expertise vereisen. AI kan ondersteunen bij code genereren, hyperparameter tuning, feature engineering. Grootste kans: AI als co-pilot die het technische werk versnelt, niet vervangt."
+            },
+            "Business en Management": {
+                studenten: 42,
+                aiScore: 133.4,
+                pctHoog: 11.4,
+                pctMedium: 74.3,
+                pctLaag: 14.3,
+                tijdAuto: 32,
+                tijdAug: 603,
+                tijdAuth: 115,
+                frustraties: [
+                    "Veel vergaderen zonder duidelijke actie",
+                    "Balans tussen strategie en operationele taken",
+                    "Knopen doorhakken met onvolledige informatie",
+                    "Mensen motiveren en managen",
+                    "Tijdsdruk en prioriteiten stellen",
+                    "Verschillende belangen managen"
+                ],
+                voorbeeldenHoog: [
+                    "Rapporten en presentaties maken",
+                    "Data verzamelen en organiseren",
+                    "Agendabeheer",
+                    "Notulen maken"
+                ],
+                voorbeeldenMedium: [
+                    "Strategische planning",
+                    "Financiële analyses",
+                    "Marktonderzoek",
+                    "Project management",
+                    "Businessplan ontwikkeling",
+                    "KPI monitoring",
+                    "Budgettering",
+                    "Risicomanagement",
+                    "Performance reviews",
+                    "Procesoptimalisatie",
+                    "Stakeholder communicatie",
+                    "Change management",
+                    "Team coördinatie",
+                    "Contractonderhandelingen voorbereiden",
+                    "Concurrentieanalyses",
+                    "Business cases maken",
+                    "Organisatiestructuur ontwerpen",
+                    "Beleidsontwikkeling",
+                    "Kwaliteitscontrole",
+                    "Supplier management",
+                    "Resourceplanning",
+                    "Strategie implementatie",
+                    "Innovation management",
+                    "Compliance monitoring",
+                    "Customer feedback analyseren",
+                    "Partnership ontwikkeling"
+                ],
+                voorbeeldenLaag: [
+                    "Leiderschap en mensen aansturen",
+                    "Strategische beslissingen nemen",
+                    "Complexe onderhandelingen",
+                    "Cultuur en visie bepalen",
+                    "Crisis management"
+                ],
+                insights: "Business en Management is breed en veelzijdig, met veel augmentatiekansen. De grootste frustraties - vele vergaderingen en tijdsdruk - kunnen indirect verbeterd worden door AI die agendabeheer, notuleren en samenvattingen automatiseert. AI kan enorm helpen bij voorbereiding van beslissingen: data analyseren, scenario's modelleren, risico's identificeren. Maar de echte managementkern - leiderschap, mensen motiveren, strategische keuzes, cultuur vormen - blijft authentiek menselijk. Grootste kans: AI als management assistent die informatie verwerkt en opties presenteert, zodat managers sneller betere beslissingen kunnen nemen."
+            },
+            "Financiën en Verzekeringen": {
+                studenten: 8,
+                aiScore: 126.5,
+                pctHoog: 0,
+                pctMedium: 87.5,
+                pctLaag: 12.5,
+                tijdAuto: 0,
+                tijdAug: 215,
+                tijdAuth: 40,
+                frustraties: [
+                    "Complexe regelgeving en compliance",
+                    "Risicobeheer is uitdagend",
+                    "Klanten verwachtingen managen",
+                    "Marktvolatiliteit en onzekerheid"
+                ],
+                voorbeeldenHoog: [],
+                voorbeeldenMedium: [
+                    "Financiële analyses",
+                    "Risicoanalyses",
+                    "Klantadvisering",
+                    "Portfoliobeheer",
+                    "Rapportage",
+                    "Compliance checks",
+                    "Marktonderzoek"
+                ],
+                voorbeeldenLaag: [
+                    "Strategisch advies aan klanten"
+                ],
+                insights: "Opvallend: geen taken voor volledige automatisatie geïdentificeerd, maar veel augmentatie. Dit komt omdat Financiën en Verzekeringen veel complexe analyses en advisering bevat die menselijk oordeel vereist. AI kan ondersteunen met risicomodellen, marktanalyses, compliance monitoring, en scenario planning. De adviserende rol en vertrouwensrelatie met klanten blijft essentieel menselijk. Grootste kans: AI als expert systeem dat adviseurs ondersteunt met diepgaande analyses en actuele marktinzichten, waardoor ze beter geïnformeerd advies kunnen geven."
+            },
+            "Automotive Management": {
+                studenten: 7,
+                aiScore: 97.8,
+                pctHoog: 14.3,
+                pctMedium: 57.1,
+                pctLaag: 28.6,
+                tijdAuto: 40,
+                tijdAug: 70,
+                tijdAuth: 120,
+                frustraties: [
+                    "Snelle technologische veranderingen in de sector",
+                    "Balans tussen klanttevredenheid en winstgevendheid",
+                    "Technische kennis up-to-date houden",
+                    "Dealerbeheer en relaties"
+                ],
+                voorbeeldenHoog: [
+                    "Voorraad tracking"
+                ],
+                voorbeeldenMedium: [
+                    "Planning en logistiek",
+                    "Marktanalyses",
+                    "Data analyses",
+                    "Rapportages"
+                ],
+                voorbeeldenLaag: [
+                    "Proefritten begeleiden",
+                    "Verkoop en klantrelaties"
+                ],
+                insights: "Automotive Management scoort lager op AI-kansen omdat het vakgebied sterk mensgericht is. Veel taken draaien om persoonlijk klantcontact, proefritten, en het opbouwen van vertrouwen bij grote aankoopbeslissingen. AI kan wel ondersteunen bij voorraadbeheer, planning, en marktanalyses. De sector is in transitie (elektrisch, autonoom), wat nieuwe AI-kansen creëert in voorspellend onderhoud en klantadvies over nieuwe technologieën. Grootste kans: AI voor operationele efficiëntie achter de schermen, zodat verkopers meer tijd hebben voor persoonlijk klantcontact."
+            }
+        };
+
+        // Genereer details per opleiding
+        const detailsContainer = document.getElementById('details');
+        
+        for (const [opleiding, data] of Object.entries(opleidingData)) {
+            const totalTijd = data.tijdAuto + data.tijdAug + data.tijdAuth;
+            const autoPct = totalTijd > 0 ? (data.tijdAuto / totalTijd * 100).toFixed(1) : 0;
+            const augPct = totalTijd > 0 ? (data.tijdAug / totalTijd * 100).toFixed(1) : 0;
+            const authPct = totalTijd > 0 ? (data.tijdAuth / totalTijd * 100).toFixed(1) : 0;
+            
+            const section = document.createElement('div');
+            section.className = 'opleiding-detail';
+            section.innerHTML = `
+                <div class="opleiding-header">
+                    <h2 class="opleiding-title">${opleiding}</h2>
+                    <div class="opleiding-badge">AI Score: ${data.aiScore}</div>
+                </div>
+                
+                ${data.frustraties.length > 0 ? `
+                <div class="frustrations">
+                    <h3>🔥 Grootste Frustraties in dit Vakgebied</h3>
+                    <ul>
+                        ${data.frustraties.map(f => `<li>${f}</li>`).join('')}
+                    </ul>
+                </div>
+                ` : ''}
+                
+                <div class="insights-box">
+                    <h3>💡 AI Kansen & Inzichten</h3>
+                    <p>${data.insights}</p>
+                </div>
+                
+                <h3 style="color: #667eea; margin: 25px 0 15px 0;">⏱️ Tijdsverdeling naar AI-Niveau</h3>
+                <div class="time-distribution">
+                    ${data.tijdAuto > 0 ? `<div class="time-auto" style="width: ${autoPct}%">${autoPct}%<br>Automatisatie</div>` : ''}
+                    ${data.tijdAug > 0 ? `<div class="time-aug" style="width: ${augPct}%">${augPct}%<br>Augmentatie</div>` : ''}
+                    ${data.tijdAuth > 0 ? `<div class="time-auth" style="width: ${authPct}%">${authPct}%<br>Authenticiteit</div>` : ''}
+                </div>
+                
+                <div class="analysis-grid">
+                    ${data.voorbeeldenHoog.length > 0 ? `
+                    <div class="analysis-card">
+                        <h3>🤖 Volledige Automatisatie</h3>
+                        <p style="margin-bottom: 15px; color: #666;">
+                            <strong>${data.pctHoog}%</strong> van de taken. AI kan deze taken volledig overnemen.
+                        </p>
+                        <ul class="task-list">
+                            ${data.voorbeeldenHoog.map(t => `<li>${t}</li>`).join('')}
+                        </ul>
+                    </div>
+                    ` : ''}
+                    
+                    ${data.voorbeeldenMedium.length > 0 ? `
+                    <div class="analysis-card">
+                        <h3>🤝 AI Augmentatie</h3>
+                        <p style="margin-bottom: 15px; color: #666;">
+                            <strong>${data.pctMedium}%</strong> van de taken. AI ondersteunt en versterkt menselijk werk.
+                        </p>
+                        <ul class="task-list">
+                            ${data.voorbeeldenMedium.slice(0, 8).map(t => `<li>${t}</li>`).join('')}
+                            ${data.voorbeeldenMedium.length > 8 ? `<li><em>...en ${data.voorbeeldenMedium.length - 8} andere taken</em></li>` : ''}
+                        </ul>
+                    </div>
+                    ` : ''}
+                    
+                    ${data.voorbeeldenLaag.length > 0 ? `
+                    <div class="analysis-card">
+                        <h3>👤 Authentiek Menselijk</h3>
+                        <p style="margin-bottom: 15px; color: #666;">
+                            <strong>${data.pctLaag}%</strong> van de taken. Blijft essentieel menselijk werk.
+                        </p>
+                        <ul class="task-list">
+                            ${data.voorbeeldenLaag.map(t => `<li>${t}</li>`).join('')}
+                        </ul>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+            
+            detailsContainer.appendChild(section);
+        }
+    </script>
+</body>
+</html>
