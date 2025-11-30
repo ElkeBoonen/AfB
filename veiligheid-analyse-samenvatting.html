@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veiligheid-dilemma's per Sector</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #e74c3c 0%, #e74c3cdd 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #e74c3c 0%, #e74c3cdd 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .intro {
+            padding: 40px;
+            background: #f8f9fa;
+            border-bottom: 3px solid #e74c3c;
+        }
+        
+        .intro h2 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+        
+        .sector-detail {
+            padding: 40px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .sector-detail:last-child {
+            border-bottom: none;
+        }
+        
+        .sector-title {
+            font-size: 2em;
+            color: #e74c3c;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #e74c3c;
+        }
+        
+        .ethical-question {
+            background: linear-gradient(135deg, #e74c3c20 0%, #e74c3c10 100%);
+            border-left: 5px solid #e74c3c;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .ethical-question h3 {
+            color: #e74c3c;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+        
+        .ethical-question .question-text {
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #333;
+            font-style: italic;
+            line-height: 1.5;
+        }
+        
+        .kernprobleem-box {
+            background: #e74c3c15;
+            border: 2px solid #e74c3c;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .kernprobleem-box h4 {
+            color: #e74c3c;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .kernprobleem-box p {
+            font-size: 1.1em;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .section-content {
+            margin: 25px 0;
+        }
+        
+        .section-content h4 {
+            color: #e74c3c;
+            font-size: 1.2em;
+            margin-bottom: 12px;
+        }
+        
+        .key-points {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .key-points li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.7;
+        }
+        
+        .key-points li::before {
+            content: "●";
+            color: #e74c3c;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .concerns-list {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .concerns-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .concerns-list li::before {
+            content: "⚠";
+            position: absolute;
+            left: 0;
+        }
+        
+        .example-box {
+            background: #e8f5e9;
+            border-left: 4px solid #27ae60;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .example-box h5 {
+            color: #27ae60;
+            margin-bottom: 10px;
+            font-style: normal;
+            font-size: 1em;
+        }
+        
+        .trade-off-box {
+            background: #f0f0f0;
+            border-left: 5px solid #666;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .trade-off-box h4 {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .trade-off-box p {
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .nav-menu {
+            background: #2c3e50;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.2s;
+            font-size: 0.9em;
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        ul {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔒 Veiligheid-dilemma's per Sector</h1>
+            <p>Kernproblemen, ethische vragen en concrete voorbeelden</p>
+        </header>
+        
+        <div class="intro">
+            <h2>Over deze analyse</h2>
+            <p>Deze analyse brengt de belangrijkste veiligheid-dilemma's per sector in kaart. Per sector zie je het <strong>kernprobleem</strong>, de <strong>centrale ethische vraag</strong>, de <strong>belangrijkste issues</strong> en een <strong>concreet voorbeeld</strong> uit de praktijk.</p>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="#accountancy-fiscaliteit">Accountancy-Fiscaliteit</a>
+            <a href="#airfreight-logistics">Airfreight Logistics</a>
+            <a href="#applied-data-intelligence">Applied Data Intelligence</a>
+            <a href="#automotive-management">Automotive Management</a>
+            <a href="#business-en-management">Business en Management</a>
+            <a href="#financiën-en-verzekeringen">Financiën en Verzekeringen</a>
+            <a href="#immobiliën-en-verzekeringen">Immobiliën en Verzekeringen</a>
+            <a href="#internationaal-ondernemen">Internationaal Ondernemen</a>
+            <a href="#marketing">Marketing</a>
+            <a href="#supply-chain-management">Supply Chain Management</a>
+        </nav>
+        
+        <div id="details">
+        
+        <div class="sector-detail" id="accountancy-fiscaliteit">
+            <h2 class="sector-title">Accountancy-Fiscaliteit</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Ben je als accountant aansprakelijk voor AI security risks die je niet kunt controleren?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Vertrouwelijke cliëntdata inadequaat beveiligd bij gebruik van cloud tools</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Cliëntdata in onbeveiligde cloud storage</li>
+                    <li>Email zonder encryptie voor gevoelige financiële documenten</li>
+                    <li>Geen strikte access controls op wie wat kan zien</li>
+                    <li>Gebruik van consumer-grade tools voor professionele data</li>
+                    <li>Inadequate vetting van third-party software providers</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Beroepsaansprakelijkheid bij security breaches</li>
+                    <li>Verlies van cliëntvertrouwen is existentieel</li>
+                    <li>Concurrenten kunnen gevoelige business data bemachtigen</li>
+                    <li>Compliance met privacy wetgeving wordt geschonden</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Accountantskantoor gebruikt Dropbox voor cliëntdata. Een werknemer's account wordt gehackt, criminelen krijgen toegang tot belastingaangiftes en financiële overzichten van honderden bedrijven.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Accountants gebruiken steeds meer third-party AI tools voor efficiency. Maar ze zijn verantwoordelijk voor client data security, ook al hebben ze geen controle over die tools. Waar ligt de grens van verantwoordelijkheid?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="airfreight-logistics">
+            <h2 class="sector-title">Airfreight Logistics</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Hoe beveilig je een keten die zo sterk is als zijn zwakste schakel?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Supply chain met tientallen partijen is zo sterk als zwakste schakel</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Geen uniforme security standaarden in de keten</li>
+                    <li>Kleinere partners hebben vaak zwakke security</li>
+                    <li>Data wordt tussen partijen gedeeld zonder encryptie</li>
+                    <li>Geen end-to-end security verificatie mogelijk</li>
+                    <li>One breach can compromise entire chain</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Zwakste partner wordt vaak targeted</li>
+                    <li>Lading tracking kan voor diefstallen gebruikt worden</li>
+                    <li>Customer data en chauffeur locaties zijn kwetsbaar</li>
+                    <li>Bij breach is onduidelijk wie verantwoordelijk en liable is</li>
+                    <li>Kosten van breach worden afgewenteld op zwakste partij</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Klein handling bedrijf met zwakke security wordt gehackt. Via hun systemen krijgen criminelen toegang tot tracking data van hele supply chain. High-value shipments worden systematisch gestolen.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Luchtvaart supply chains hebben honderden partijen. Je kunt je eigen security maximaliseren maar je blijft afhankelijk van de minst veilige partner. Wie is verantwoordelijk?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="applied-data-intelligence">
+            <h2 class="sector-title">Applied Data Intelligence</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Kun je data 'veilig genoeg' maken voor AI training zonder het nuttig te maken?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Training data en modellen onvoldoende beveiligd tegen diefstal</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Proprietary AI modellen kunnen gestolen worden</li>
+                    <li>Training data bevat vaak gevoelige persoonlijke informatie</li>
+                    <li>Geen adequate access controls op development environments</li>
+                    <li>Model extraction attacks zijn mogelijk</li>
+                    <li>API's lekken soms training data</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Intellectueel eigendom verlies van miljoenen investering</li>
+                    <li>Concurrenten kunnen modellen repliceren</li>
+                    <li>Privacy breaches als training data lekt</li>
+                    <li>Malicious actors kunnen modellen manipuleren</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Een AI bedrijf's training data - gescraped van miljoenen gebruikers - wordt gestolen. Data bevat persoonlijke berichten, medische informatie en financiële details. Massale privacy breach.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Anonimisering en encryption maken data veiliger maar ook minder bruikbaar voor AI. Te veel security measures kunnen innovatie blokkeren. Te weinig leidt tot privacy breaches.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="automotive-management">
+            <h2 class="sector-title">Automotive Management</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Wat als connected car security faalt tijdens het rijden?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Connected cars zijn kwetsbaar voor hacking met potentieel fatale gevolgen</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Onvoldoende security in automotive software</li>
+                    <li>Over-the-air updates kunnen gemanipuleerd worden</li>
+                    <li>CAN bus systemen zijn hackbaar</li>
+                    <li>Geen adequate encryption van car-to-cloud communicatie</li>
+                    <li>Safety-critical systemen kunnen gecompromitteerd worden</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Fysieke veiligheid: gehackte auto kan dodelijk zijn</li>
+                    <li>Remote hijacking van voertuigen is mogelijk</li>
+                    <li>Massale recalls bij security vulnerabilities</li>
+                    <li>Terroristen kunnen auto's als wapen gebruiken</li>
+                    <li>Verzekeraars verhogen premies bij onveilige modellen</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Researchers demonstreren dat ze een populair auto model op afstand kunnen hacken, remmen uitschakelen en auto besturen. Fabrikant moet miljoenen auto's recallen.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Connected cars kunnen worden gehackt. Updates kunnen bugs introduceren. Over-the-air fixes zijn convenient maar riskant. Geen updates is ook riskant. Veiligheid tijdens gebruik is kritiek.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="business-en-management">
+            <h2 class="sector-title">Business en Management</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Hoeveel veiligheid is verantwoord gezien de kosten? Wanneer is 'goed genoeg' echt genoeg?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Onvoldoende beveiliging van gevoelige bedrijfsdata in cloud systemen</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Zwakke passwords en gebrek aan multi-factor authenticatie</li>
+                    <li>Gevoelige data onversleuteld opgeslagen in shared drives</li>
+                    <li>Werknemers gebruiken persoonlijke devices zonder security</li>
+                    <li>Geen adequate backup strategie bij ransomware aanvallen</li>
+                    <li>Third-party tools met onbekende security risico's</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Datalekken kunnen bedrijf miljoenen kosten</li>
+                    <li>Reputatieschade is vaak onherstelbaar</li>
+                    <li>Intellectueel eigendom kan gestolen worden</li>
+                    <li>Compliance boetes bij onvoldoende beveiliging</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Een werknemer klikt op phishing link en geeft criminelen toegang tot HR-systeem met alle personeelsdata van 5000 werknemers. Bedrijf moet dit melden en krijgt GDPR-boete.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Perfecte beveiliging is onmogelijk en onbetaalbaar. Bedrijven moeten balanceren tussen veiligheid, bruikbaarheid en kosten. Maar bij een datalek zeggen slachtoffers altijd 'jullie hadden meer moeten doen'.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="financiën-en-verzekeringen">
+            <h2 class="sector-title">Financiën en Verzekeringen</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Wat als beveiliging van data botst met regulatory compliance en reporting verplichtingen?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Financiële data is aantrekkelijk doelwit met onvoldoende bescherming</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Legacy systemen met bekende security vulnerabilities</li>
+                    <li>Onvoldoende encryptie van gevoelige financiële data</li>
+                    <li>Insider threats door te brede toegangsrechten</li>
+                    <li>Kwetsbaar voor sophisticated cyberaanvallen</li>
+                    <li>Inadequate security bij data-uitwisseling met partners</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Financiële fraude en identiteitsdiefstal</li>
+                    <li>Systemisch risico: één lek kan domino-effect hebben</li>
+                    <li>Regulatoire consequenties zijn enorm</li>
+                    <li>Klanten verliezen levensbesparingen</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Verzekeraar wordt gehackt via oude webapplicatie. Criminelen stelen medische dossiers en financiële gegevens van 2 miljoen klanten, gebruiken dit voor fraude en afpersing.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Financiële data moet zowel extreem veilig zijn als toegankelijk voor audits en autoriteiten. Deze eisen kunnen elkaar tegenspreken. Wie krijgt prioriteit: privacy of toezicht?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="immobiliën-en-verzekeringen">
+            <h2 class="sector-title">Immobiliën en Verzekeringen</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Moet je mensen afwijzen omdat je hun data niet veilig kunt houden?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Persoonlijke financiële data van kandidaten onvoldoend beschermd</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Salarisstroken en bankafschriften onversleuteld opgeslagen</li>
+                    <li>ID-documenten zonder adequate security bewaard</li>
+                    <li>Zwakke access controls op gevoelige aanvraagdata</li>
+                    <li>Data van afgewezen kandidaten wordt te lang bewaard</li>
+                    <li>Onveilige data-uitwisseling met kredietbureaus</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Identiteitsfraude met gestolen persoonlijke documenten</li>
+                    <li>Financiële informatie kan voor afpersing gebruikt worden</li>
+                    <li>Discriminatie mogelijk als data in verkeerde handen valt</li>
+                    <li>Reputatieschade voor verhuurders en verkopers</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Makelaarskantoor wordt gehackt. Criminelen krijgen toegang tot kopieën van paspoorten, salarisstroken en bankafschriften van alle recente woningzoekers. Grootschalige identiteitsfraude volgt.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Als je security niet op orde is, riskeer je lekken van zeer gevoelige persoonlijke data. Maar mensen weigeren betekent dat ze uitgesloten worden. Is het ethischer om ze te bedienen met risico, of te weigeren?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="internationaal-ondernemen">
+            <h2 class="sector-title">Internationaal Ondernemen</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Welk land's security standards gelden als data overal is?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Inconsistente security standaarden in verschillende landen creëren zwakke schakels</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Sommige regio's hebben zwakkere cybersecurity infrastructuur</li>
+                    <li>Lokale teams hanteren lagere security standaarden</li>
+                    <li>Data transfers tussen landen introduceren vulnerabilities</li>
+                    <li>Niet alle locaties hebben adequate security training</li>
+                    <li>Weakest link probleem in global netwerken</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Hack in zwakste regio compromitteert hele netwerk</li>
+                    <li>Compliance nightmare bij internationale breaches</li>
+                    <li>Verschillende notification verplichtingen per land</li>
+                    <li>Kosten van uniform hoogste security level zijn enorm</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Multinational wordt gehackt via slecht beveiligd kantoor in land met zwakke cyber laws. Van daar uit krijgen aanvallers toegang tot global netwerk en kunnen data van alle regio's stelen.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Global data flows vereisen keuzes: hoogste security standard overal (duur), laagste (onveilig), of lokaal maatwerk (complex). Elke keuze heeft security implicaties.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="marketing">
+            <h2 class="sector-title">Marketing</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Wie betaalt de prijs voor onveilige marketing data? Het bedrijf of de klant?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Marketing data wordt gedeeld met tientallen partners zonder adequate security</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Customer data in onbeveiligde marketing platforms</li>
+                    <li>Data brokers hebben zwakke security maar wel toegang tot alles</li>
+                    <li>Geen encryptie bij data-overdracht tussen platforms</li>
+                    <li>Third-party trackers introduceren vulnerabilities</li>
+                    <li>Gevoelige profilering data slecht beveiligd</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Elke partner is een potentieel lek punt</li>
+                    <li>Marketing data bevat vaak gevoelige persoonlijke informatie</li>
+                    <li>Supply chain attacks via marketing tech stack</li>
+                    <li>Klanten betalen de prijs voor onveilige marketing praktijken</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Een marketing platform wordt gehackt. Criminelen krijgen toegang tot customer profiles met koopgedrag, gezondheidsinteresses en financiële info van miljoenen gebruikers.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Marketing data is waardevol en bedrijven willen het delen met partners. Maar elke partij die toegang krijgt is een extra beveiligingsrisico. Centralisatie is veiliger maar creëert een groter doelwit.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="supply-chain-management">
+            <h2 class="sector-title">Supply Chain Management</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Is efficiency belangrijker dan security in tijdskritieke logistiek?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>GPS tracking systemen zijn kwetsbaar voor hacking en misbruik</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Onbeveiligde GPS trackers kunnen gehackt worden</li>
+                    <li>Real-time locatiedata van chauffeurs is te onderscheppen</li>
+                    <li>Zwakke authenticatie op tracking platforms</li>
+                    <li>Geen encryptie van gevoelige logistieke data</li>
+                    <li>Stalking en fysieke veiligheidsrisico's door datalekken</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Chauffeurs fysiek in gevaar bij gelekte locatiedata</li>
+                    <li>Lading kan gestolen worden met tracking info</li>
+                    <li>Concurrenten kunnen routes en klanten achterhalen</li>
+                    <li>Criminelen kunnen bewegingspatronen exploiteren</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Hackers breken in op tracking systeem en verkopen real-time locaties van waardetransport chauffeurs aan criminele bendes. Meerdere overvallen volgen.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Extra beveiligingslagen vertragen processen en kosten geld. In tijdsgevoelige supply chains kan dit significante schade opleveren. Maar een security breach kan de hele keten platleggen.</p>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.nav-menu a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

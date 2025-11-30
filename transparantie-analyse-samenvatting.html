@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparantie-dilemma's per Sector</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #3498db 0%, #3498dbdd 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #3498db 0%, #3498dbdd 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .intro {
+            padding: 40px;
+            background: #f8f9fa;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .intro h2 {
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+        
+        .sector-detail {
+            padding: 40px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .sector-detail:last-child {
+            border-bottom: none;
+        }
+        
+        .sector-title {
+            font-size: 2em;
+            color: #3498db;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .ethical-question {
+            background: linear-gradient(135deg, #3498db20 0%, #3498db10 100%);
+            border-left: 5px solid #3498db;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .ethical-question h3 {
+            color: #3498db;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+        
+        .ethical-question .question-text {
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #333;
+            font-style: italic;
+            line-height: 1.5;
+        }
+        
+        .kernprobleem-box {
+            background: #3498db15;
+            border: 2px solid #3498db;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .kernprobleem-box h4 {
+            color: #3498db;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .kernprobleem-box p {
+            font-size: 1.1em;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .section-content {
+            margin: 25px 0;
+        }
+        
+        .section-content h4 {
+            color: #3498db;
+            font-size: 1.2em;
+            margin-bottom: 12px;
+        }
+        
+        .key-points {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .key-points li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.7;
+        }
+        
+        .key-points li::before {
+            content: "●";
+            color: #3498db;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .concerns-list {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .concerns-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .concerns-list li::before {
+            content: "⚠";
+            position: absolute;
+            left: 0;
+        }
+        
+        .example-box {
+            background: #e8f5e9;
+            border-left: 4px solid #27ae60;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .example-box h5 {
+            color: #27ae60;
+            margin-bottom: 10px;
+            font-style: normal;
+            font-size: 1em;
+        }
+        
+        .trade-off-box {
+            background: #f0f0f0;
+            border-left: 5px solid #666;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .trade-off-box h4 {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .trade-off-box p {
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .nav-menu {
+            background: #2c3e50;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.2s;
+            font-size: 0.9em;
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        ul {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 Transparantie-dilemma's per Sector</h1>
+            <p>Kernproblemen, ethische vragen en concrete voorbeelden</p>
+        </header>
+        
+        <div class="intro">
+            <h2>Over deze analyse</h2>
+            <p>Deze analyse brengt de belangrijkste transparantie-dilemma's per sector in kaart. Per sector zie je het <strong>kernprobleem</strong>, de <strong>centrale ethische vraag</strong>, de <strong>belangrijkste issues</strong> en een <strong>concreet voorbeeld</strong> uit de praktijk.</p>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="#accountancy-fiscaliteit">Accountancy-Fiscaliteit</a>
+            <a href="#airfreight-logistics">Airfreight Logistics</a>
+            <a href="#applied-data-intelligence">Applied Data Intelligence</a>
+            <a href="#automotive-management">Automotive Management</a>
+            <a href="#business-en-management">Business en Management</a>
+            <a href="#financiën-en-verzekeringen">Financiën en Verzekeringen</a>
+            <a href="#immobiliën-en-verzekeringen">Immobiliën en Verzekeringen</a>
+            <a href="#internationaal-ondernemen">Internationaal Ondernemen</a>
+            <a href="#marketing">Marketing</a>
+            <a href="#supply-chain-management">Supply Chain Management</a>
+        </nav>
+        
+        <div id="details">
+        
+        <div class="sector-detail" id="accountancy-fiscaliteit">
+            <h2 class="sector-title">Accountancy-Fiscaliteit</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Hoe leg je uit dat AI een fiscaal advies geeft zonder het beroepsgeheim te schenden?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>AI-gestuurde fiscale adviezen zonder uitleg over de redenering</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Tax software geeft aanbevelingen zonder transparante onderbouwing</li>
+                    <li>Cliënten begrijpen niet hoe AI tot fiscale conclusies komt</li>
+                    <li>Accountants kunnen complexe AI-uitkomsten niet uitleggen</li>
+                    <li>Geen inzicht in welke data en regels AI gebruikt</li>
+                    <li>Black box systemen maken tweede opinies onmogelijk</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Beroepsmatige verantwoordelijkheid ondermijnd als je niet kunt uitleggen</li>
+                    <li>Fouten in AI-logica kunnen lang onopgemerkt blijven</li>
+                    <li>Cliënten kunnen niet verifiëren of advies klopt</li>
+                    <li>Belastingdienst accepteert mogelijk geen AI-onderbouwing</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                AI adviseert een specifieke fiscale constructie. De accountant kan niet uitleggen waarom dit de beste optie is, alleen dat 'het systeem dit aanbeveelt'. Cliënt voelt zich ongemakkelijk.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Cliënten verdienen uitleg over AI-tools die hun financiële beslissingen beïnvloeden. Maar volledige transparantie over methoden en data kan vertrouwelijke informatie blootleggen of concurrenten helpen.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="airfreight-logistics">
+            <h2 class="sector-title">Airfreight Logistics</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Wie moet transparantie krijgen in een complexe supply chain met tientallen partijen?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Complexe supply chains maken volledige transparantie praktisch onmogelijk</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Geen end-to-end zicht op datastromen</li>
+                    <li>Te veel partijen betrokken voor heldere communicatie</li>
+                    <li>Klanten weten niet wie allemaal toegang heeft tot hun data</li>
+                    <li>Chauffeurs hebben geen inzicht in cross-company tracking</li>
+                    <li>Verantwoordelijkheden zijn onduidelijk gedocumenteerd</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Transparantie verdwijnt in complexiteit</li>
+                    <li>Niemand heeft compleet overzicht</li>
+                    <li>Bij problemen is onduidelijk wie verantwoordelijk is</li>
+                    <li>Praktische onmogelijkheid van volledige transparantie</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Een pakket wordt via 12 bedrijven vervoerd. De klant vraagt welke bedrijven zijn data hebben. Niemand kan een volledig antwoord geven omdat elk bedrijf alleen zijn eigen deel kent.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Volledige transparantie voor alle stakeholders kan vertrouwen opbouwen maar is logistiek complex en kan concurrentievoordeel schaden. Selectieve transparantie is praktischer maar schept machtsverschillen.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="applied-data-intelligence">
+            <h2 class="sector-title">Applied Data Intelligence</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Kun je een black box AI-model uitleggen op een manier die ècht begrijpelijk is voor leken?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>AI-modellen zijn fundamenteel onuitlegbaar, zelfs voor ontwikkelaars</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Deep learning modellen werken als black boxes</li>
+                    <li>Explainable AI geeft vaak misleidende simplificaties</li>
+                    <li>Technische uitleg is onbegrijpelijk voor niet-experts</li>
+                    <li>Trade-off tussen performance en uitlegbaarheid</li>
+                    <li>Post-hoc explanations vertellen niet het echte verhaal</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Fundamentele vraag: zijn complexe AI-systemen überhaupt uitlegbaar?</li>
+                    <li>Schijnbare transparantie is erger dan geen transparantie</li>
+                    <li>Debugging wordt onmogelijk in volledige black boxes</li>
+                    <li>Regulering vereist uitleg die technisch niet mogelijk is</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Een bedrijf wordt verplicht te uitleggen waarom hun AI iemand afwijst. De 'uitleg' is: '347 features met complexe non-lineaire interacties'. Dit helpt niemand.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Echte technische transparantie is voor de meeste mensen onbegrijpelijk. Versimpelde uitleg kan misleidend zijn. De vraag is of 'explainable AI' wel echt possible is of slechts een illusie van begrip creëert.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="automotive-management">
+            <h2 class="sector-title">Automotive Management</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Moeten connected cars volledig transparent zijn over hun dataverzameling? Of schaadt dat de user experience?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Connected cars verzamelen data zonder transparantie over gebruik</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Geen duidelijkheid over welke data wordt verzameld</li>
+                    <li>Ondoorzichtig wie toegang heeft tot auto-data</li>
+                    <li>Geen uitleg hoe data gebruikt wordt voor verzekeringen</li>
+                    <li>Software updates zonder changelog of uitleg</li>
+                    <li>Bestuurders weten niet wat naar fabrikant wordt gestuurd</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Geen informed consent mogelijk zonder transparantie</li>
+                    <li>Discriminatie door verzekeraars blijft verborgen</li>
+                    <li>Veiligheidsrisico's van software updates onbekend</li>
+                    <li>Geen controle zonder inzicht</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Een bestuurder ontdekt dat zijn verzekering is verhoogd 'op basis van rijgedrag data'. Wat precies werd gemeten en waarom dit tot verhoging leidde blijft onduidelijk.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Continue transparency notifications kunnen vermoeiend en afleidend zijn tijdens het rijden. Maar zonder transparantie hebben bestuurders geen idee welke data wordt verzameld. Hoe vind je de balans?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="business-en-management">
+            <h2 class="sector-title">Business en Management</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Hoeveel transparantie is genoeg? Wanneer wordt volledige openheid contraproductief of zelfs gevaarlijk?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Black box AI-systemen zonder uitleg over hoe beslissingen tot stand komen</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Werknemers begrijpen niet hoe AI hun performance beoordeelt</li>
+                    <li>Geen inzicht in welke data wordt gebruikt voor besluitvorming</li>
+                    <li>Algoritmes bepalen promoties zonder transparante criteria</li>
+                    <li>Managers kunnen niet uitleggen waarom AI bepaalde aanbevelingen doet</li>
+                    <li>Gebrek aan documentatie over hoe systemen werken</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Onmogelijk om beslissingen te contesteren als je niet weet hoe ze gemaakt zijn</li>
+                    <li>Vertrouwen in systemen verdwijnt zonder uitleg</li>
+                    <li>Fouten kunnen niet worden geïdentificeerd en gecorrigeerd</li>
+                    <li>Discriminatie blijft onzichtbaar in black box systemen</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Een werknemer wordt overgeslagen voor promotie. Het HR-systeem geeft een score, maar niemand kan uitleggen welke factoren tot deze score leidden of hoe deze te verbeteren.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Volledige transparantie over AI-systemen kan vertrouwen opbouwen en accountability mogelijk maken. Maar te veel transparantie kan ook bedrijfsgeheimen blootleggen, malafide actoren helpen systemen te manipuleren, of mensen overweldigen met technische details die ze niet kunnen interpreteren.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="financiën-en-verzekeringen">
+            <h2 class="sector-title">Financiën en Verzekeringen</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Moeten verzekeraars volledig transparent zijn over hun risico-algoritmes? Of maakt dat het systeem manipuleerbaar?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Ondoorzichtige algoritmes bepalen premies zonder uitleg aan klanten</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Geen uitleg waarom premie hoger is dan verwacht</li>
+                    <li>Credit scores worden gebruikt zonder transparantie over factoren</li>
+                    <li>Risico-modellen zijn bedrijfsgeheim en volledig ondoorzichtig</li>
+                    <li>Afwijzingen gebeuren zonder specifieke reden</li>
+                    <li>Klanten kunnen profielen niet inzien of corrigeren</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Discriminatie kan verborgen blijven in complexe algoritmes</li>
+                    <li>Fouten in data leiden tot hogere premies zonder dat klant dit weet</li>
+                    <li>Geen mogelijkheid om misleidende of onjuiste informatie te betwisten</li>
+                    <li>Vertrouwen in financiële sector verdwijnt</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Een klant krijgt hogere autoverzekeringspremie maar krijgt alleen te horen dat dit 'op basis van risico-analyse' is. Welke factoren en waarom blijft onduidelijk.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Uitleg over premiebepaling kan eerlijk voelen en fraude helpen opsporen. Maar volledige algoritmische transparantie kan mensen helpen het systeem te misleiden, of bedrijfsgeheimen blootleggen.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="immobiliën-en-verzekeringen">
+            <h2 class="sector-title">Immobiliën en Verzekeringen</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Moet je exact uitleggen waarom iemand wordt afgewezen voor een huis of verzekering?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Algoritmische afwijzingen zonder uitleg over de gronden</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Automatische afwijzing voor hypotheek zonder specifieke reden</li>
+                    <li>Scores worden gegeven zonder uitleg over berekening</li>
+                    <li>Geen transparantie over welke factoren meewegen</li>
+                    <li>Verhuurders gebruiken algoritmes maar leggen criteria niet uit</li>
+                    <li>Afgewezen kandidaten krijgen alleen generieke redenen</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Mensen kunnen situatie niet verbeteren zonder te weten wat fout is</li>
+                    <li>Discriminatie blijft verborgen achter 'objectieve scores'</li>
+                    <li>Recht op uitleg wordt niet gerespecteerd</li>
+                    <li>Vicieuze cirkel: afwijzing → slechte score → meer afwijzingen</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Een gezin wordt afgewezen voor een huurwoning met alleen de mededeling 'score te laag'. Ze weten niet of het inkomen, historie, of andere factoren zijn en kunnen dus niets verbeteren.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Transparantie kan discriminatie blootleggen en mensen helpen hun situatie te verbeteren. Maar te gedetailleerde uitleg kan gaming mogelijk maken of bedrijfsmodellen kwetsbaar maken voor exploitatie.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="internationaal-ondernemen">
+            <h2 class="sector-title">Internationaal Ondernemen</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Moet je in verschillende landen verschillende transparency-standaarden hanteren?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Verschillende transparantie-standaarden per land creëren ongelijkheid</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>EU-werknemers krijgen uitleg, anderen niet</li>
+                    <li>Inconsistente communicatie over AI-gebruik wereldwijd</li>
+                    <li>Sommige regio's hebben geen recht op inzage</li>
+                    <li>Culturele verschillen in transparantie-verwachtingen</li>
+                    <li>Geen uniforme documentatie van AI-systemen</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Twee-klassen systeem: transparantie als privilege</li>
+                    <li>Complexiteit van multi-jurisdictie compliance</li>
+                    <li>Werknemers voelen ongelijke behandeling</li>
+                    <li>Race to the bottom: minste transparantie wordt norm</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Een global HR AI-systeem moet in EU gedetailleerde uitleg geven bij afwijzingen, maar in Azië worden werknemers alleen een score gegeven zonder verdere toelichting.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Uniforme transparantie is eerlijk maar operationeel complex. Lokale aanpassing respecteert culturele verschillen maar creëert ongelijkheid. Wat win je met transparantie als mensen in sommige culturen het wantrouwen ervaren?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="marketing">
+            <h2 class="sector-title">Marketing</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Moeten mensen weten dat ze door AI worden geprofileerd en getarget? Of schaadt die kennis het gebruiksgemak?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Consumenten weten niet dat en hoe ze geprofileerd en getarget worden</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Targeting algoritmes werken volledig in het verborgene</li>
+                    <li>Geen uitleg waarom specifieke advertenties worden getoond</li>
+                    <li>Consumenten zien niet welk profiel van hen is opgebouwd</li>
+                    <li>Dark patterns maskeren data verzameling praktijken</li>
+                    <li>Cookie banners zijn misleidend over daadwerkelijk datagebruik</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Manipulatie wordt onzichtbaar gemaakt</li>
+                    <li>Geen mogelijkheid om incorrecte profielen te corrigeren</li>
+                    <li>Discriminatoire targeting blijft onder de radar</li>
+                    <li>Kwetsbare groepen worden uitgebuit zonder het te weten</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Een persoon krijgt constant payday loan advertenties maar weet niet dat algoritmes hem als 'financieel kwetsbaar' hebben gelabeld op basis van zijn browsing gedrag.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Transparantie over targeting geeft mensen controle, maar kan ook leiden tot ongemak, weerstand tegen nuttige personalisatie, of gaming van het systeem. Bedrijven vrezen dat volledige openheid hun concurrentiepositie schaadt.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="supply-chain-management">
+            <h2 class="sector-title">Supply Chain Management</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Moeten chauffeurs real-time inzicht hebben in hun tracking data? Of verstoort dat de werkefficiëntie?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Chauffeurs hebben geen inzicht in hun eigen tracking data en scores</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Geen real-time toegang tot eigen locatiedata en performance metrics</li>
+                    <li>Routes worden bepaald door algoritmes zonder uitleg</li>
+                    <li>Beoordelingssystemen zijn volledig ondoorzichtig</li>
+                    <li>Chauffeurs weten niet welke factoren hun bonus beïnvloeden</li>
+                    <li>Geen inzicht in wie toegang heeft tot hun data</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Onmogelijk om oneerlijke beoordelingen te betwisten</li>
+                    <li>Chauffeurs kunnen gedrag niet aanpassen zonder feedback</li>
+                    <li>Machtsonevenwicht: werkgever weet alles, werknemer niets</li>
+                    <li>Willekeur in besluitvorming kan niet worden blootgelegd</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Een chauffeur krijgt lagere beoordeling maar weet niet waarom. Het systeem registreert dat hij 'inefficiënt' rijdt, maar hij krijgt geen details over welke acties dit veroorzaken.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Transparantie naar werknemers over monitoring kan vertrouwen opbouwen, maar werkgevers vrezen dat dit leidt tot strategic gaming, verminderde productiviteit, of juridische kwetsbaarheid.</p>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.nav-menu a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

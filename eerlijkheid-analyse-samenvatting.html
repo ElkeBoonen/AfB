@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eerlijkheid-dilemma's per Sector</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #27ae60 0%, #27ae60dd 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #27ae60 0%, #27ae60dd 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .intro {
+            padding: 40px;
+            background: #f8f9fa;
+            border-bottom: 3px solid #27ae60;
+        }
+        
+        .intro h2 {
+            color: #27ae60;
+            margin-bottom: 15px;
+        }
+        
+        .sector-detail {
+            padding: 40px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .sector-detail:last-child {
+            border-bottom: none;
+        }
+        
+        .sector-title {
+            font-size: 2em;
+            color: #27ae60;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #27ae60;
+        }
+        
+        .ethical-question {
+            background: linear-gradient(135deg, #27ae6020 0%, #27ae6010 100%);
+            border-left: 5px solid #27ae60;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .ethical-question h3 {
+            color: #27ae60;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+        
+        .ethical-question .question-text {
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #333;
+            font-style: italic;
+            line-height: 1.5;
+        }
+        
+        .kernprobleem-box {
+            background: #27ae6015;
+            border: 2px solid #27ae60;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .kernprobleem-box h4 {
+            color: #27ae60;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .kernprobleem-box p {
+            font-size: 1.1em;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .section-content {
+            margin: 25px 0;
+        }
+        
+        .section-content h4 {
+            color: #27ae60;
+            font-size: 1.2em;
+            margin-bottom: 12px;
+        }
+        
+        .key-points {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .key-points li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.7;
+        }
+        
+        .key-points li::before {
+            content: "●";
+            color: #27ae60;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .concerns-list {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .concerns-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .concerns-list li::before {
+            content: "⚠";
+            position: absolute;
+            left: 0;
+        }
+        
+        .example-box {
+            background: #e8f5e9;
+            border-left: 4px solid #27ae60;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .example-box h5 {
+            color: #27ae60;
+            margin-bottom: 10px;
+            font-style: normal;
+            font-size: 1em;
+        }
+        
+        .trade-off-box {
+            background: #f0f0f0;
+            border-left: 5px solid #666;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .trade-off-box h4 {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .trade-off-box p {
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .nav-menu {
+            background: #2c3e50;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.2s;
+            font-size: 0.9em;
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        ul {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚖️ Eerlijkheid-dilemma's per Sector</h1>
+            <p>Kernproblemen, ethische vragen en concrete voorbeelden</p>
+        </header>
+        
+        <div class="intro">
+            <h2>Over deze analyse</h2>
+            <p>Deze analyse brengt de belangrijkste eerlijkheid-dilemma's per sector in kaart. Per sector zie je het <strong>kernprobleem</strong>, de <strong>centrale ethische vraag</strong>, de <strong>belangrijkste issues</strong> en een <strong>concreet voorbeeld</strong> uit de praktijk.</p>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="#accountancy-fiscaliteit">Accountancy-Fiscaliteit</a>
+            <a href="#airfreight-logistics">Airfreight Logistics</a>
+            <a href="#applied-data-intelligence">Applied Data Intelligence</a>
+            <a href="#automotive-management">Automotive Management</a>
+            <a href="#business-en-management">Business en Management</a>
+            <a href="#financiën-en-verzekeringen">Financiën en Verzekeringen</a>
+            <a href="#immobiliën-en-verzekeringen">Immobiliën en Verzekeringen</a>
+            <a href="#internationaal-ondernemen">Internationaal Ondernemen</a>
+            <a href="#marketing">Marketing</a>
+            <a href="#supply-chain-management">Supply Chain Management</a>
+        </nav>
+        
+        <div id="details">
+        
+        <div class="sector-detail" id="accountancy-fiscaliteit">
+            <h2 class="sector-title">Accountancy-Fiscaliteit</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als AI tax planning vooral werkt voor grote bedrijven, versterkt dat dan ongelijkheid?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>AI tax tools werken beter voor rijken, versterken ongelijkheid</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Geavanceerde AI tools alleen betaalbaar voor grote bedrijven</li>
+                    <li>Kleine bedrijven en individuen krijgen generieke AI-adviezen</li>
+                    <li>Tax optimization AI vooral effectief voor wealthy clients</li>
+                    <li>Complexity van tax law AI benadeelt lager opgeleiden</li>
+                    <li>Digital divide in access to AI tax advice</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Two-tier system: AI-optimized wealthy vs zonder-hulp armen</li>
+                    <li>Tax burden verschuift verder naar middle/lower class</li>
+                    <li>Wealth inequality wordt exponentieel verergerd</li>
+                    <li>Democratisering van AI is illusie</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Fortune 500 bedrijven gebruiken AI om legal tax avoidance te maximaliseren, betalen effectief 5% tax. Small businesses zonder AI betalen 21%. Gap groeit jaarlijks.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Geavanceerde AI-tools zijn duur en complex. Alleen grote spelers kunnen ze effectief gebruiken, waardoor ze nog meer belastingvoordeel krijgen. Is dit market efficiency of systemic unfairness dat gereguleerd moet worden?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="airfreight-logistics">
+            <h2 class="sector-title">Airfreight Logistics</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als AI routes optimalisatie betekent dat bepaalde regio's slechtere service krijgen, is dat acceptabel?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Geographic discrimination in logistics AI</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Remote/poor areas krijgen slechtste service door AI optimization</li>
+                    <li>Cost algorithms deprioritize non-profitable regions</li>
+                    <li>Rural communities systematically disadvantaged</li>
+                    <li>AI routing avoids 'problematic' neighborhoods</li>
+                    <li>Service inequality becomes geographical inequality</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Geographic discrimination compounds existing inequality</li>
+                    <li>Essential services become unavailable in marginalized areas</li>
+                    <li>Economic development in poor regions further hindered</li>
+                    <li>Digital divide becomes physical service divide</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Major logistics AI optimizes for profitable urban routes. Rural/poor areas get degraded service, higher prices, longer wait times. Businesses in those areas can't compete. Economic desert.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Cost-efficiency betekent focus op high-volume routes. Remote areas krijgen minder service. Is dit business reality or geographic discrimination that governments should regulate?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="applied-data-intelligence">
+            <h2 class="sector-title">Applied Data Intelligence</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als je training data niet divers is, maak je dan biased AI of weerspiegelt de AI gewoon de realiteit?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Training data reflect historical inequality, AI perpetuates it</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Internet data overrepresents Western, white, male perspectives</li>
+                    <li>AI trained on biased data produces biased outputs</li>
+                    <li>Facial recognition werkt slechter voor darker skin tones</li>
+                    <li>Language models encode harmful stereotypes</li>
+                    <li>Geen diversity in training data = geen diversity in outputs</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Fundamental question: should AI correct real-world bias or reflect it?</li>
+                    <li>Deploying biased AI at scale amplifies harm</li>
+                    <li>Marginalized groups get worse AI service</li>
+                    <li>Echo chamber effect: AI trains on own biased outputs</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Google Photos tagged Black people as 'gorillas'. Facial recognition fails on Asian faces. Voice assistants understand white accents better. Each instance affects millions. Bias at scale.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>AI getraind op western data werkt minder goed voor andere culturen. Is dat een bug die gefixed moet worden, of een feature die real-world distributions reflecteert? Should AI correct for real-world inequality?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="automotive-management">
+            <h2 class="sector-title">Automotive Management</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als credit algorithms mensen met goedkope auto's vaker weigeren voor een lease, is dat unfair?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Credit algorithms discrimineren bij car financing</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Minorities systematisch hogere interest rates</li>
+                    <li>Postcode determines financing terms meer dan credit score</li>
+                    <li>AI assumes oude auto = hoger risk, people can't upgrade</li>
+                    <li>Dealership AI pricing discrimineert op basis van appearance</li>
+                    <li>Lease approvals biased against certain demographics</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Transportation access verder beperkt voor marginalized groups</li>
+                    <li>Economic mobility prevented by discriminatory car financing</li>
+                    <li>Vicious cycle: geen auto → geen job → can't get auto</li>
+                    <li>Fair lending laws circumvented by AI opacity</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Journalists test: exact same finances, different names/zip. 'Jose' in Latino neighborhood quoted 2.5% higher APR than 'John' in white neighborhood. Pattern across multiple dealers.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Car choice correleert met inkomen en payment behavior. Dat is relevant voor credit decisions. Maar het creëert ook een cycle: people with cheaper cars kunnen niet upgraden. Is dit economic efficiency of systemic exclusion?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="business-en-management">
+            <h2 class="sector-title">Business en Management</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als AI bij promoties systematisch vrouwen of minderheden benadeelt, is dat dan de AI's schuld of de cultuur van het bedrijf?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>AI reproduceert en versterkt historische bias in hiring en promoties</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Recruiting AI leert van biased historical hiring data</li>
+                    <li>Vrouwen systematisch lager gescoord omdat historisch minder vrouwen in senior roles</li>
+                    <li>Performance evaluatie AI benadeelt werknemers met zorgtaken</li>
+                    <li>Promotie algoritmes favoriseren bepaalde persoonlijkheidstypen</li>
+                    <li>Feedback loops versterken bestaande ongelijkheid exponentieel</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Discriminatie wordt geautomatiseerd en gelegitimeerd als 'objectief'</li>
+                    <li>Diversiteits-doelen onmogelijk te bereiken met biased AI</li>
+                    <li>Generaties werknemers worden uitgesloten</li>
+                    <li>Legal exposure: discrimination lawsuits nemen toe</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Amazon's AI recruiting tool gaf automatisch lagere scores aan CV's met woorden als 'women's chess club'. Tool werd gescrapped maar veel bedrijven gebruiken vergelijkbare systemen nog steeds.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>AI leert van historische data die menselijke biases weerspiegelt. Je kunt de AI 'blind' maken voor gender/etniciteit, maar dan negeer je mogelijk legitimate contextual factors. Of je laat het erin en riskeert discriminatie. Wat is eerlijker?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="financiën-en-verzekeringen">
+            <h2 class="sector-title">Financiën en Verzekeringen</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als mensen uit arme wijken systematisch hogere premies krijgen, is dat redelijk risicomanagement of structurele discriminatie?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Postcode en andere proxies voor ras leiden tot systematische discriminatie</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Arme wijken krijgen hogere premies puur op basis van locatie</li>
+                    <li>Credit scoring discrimineert tegen minderheden</li>
+                    <li>AI gebruikt 'neutrale' variabelen die correleren met ras</li>
+                    <li>Healthcare algoritmes gaven witte patiënten voorrang</li>
+                    <li>Statistical discrimination: group averages applied to individuals</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Legal discrimination onder mom van 'actuarial fairness'</li>
+                    <li>Vicieuze cirkel: discrimination → armoede → slechtere scores → meer discrimination</li>
+                    <li>Communities of color systematisch uitgesloten</li>
+                    <li>Wealth gap wordt exponentieel groter</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Algoritme in healthcare gaf witte patiënten dubbele kans op extra zorg vs zwarte patiënten met zelfde conditie. Gebruikte 'healthcare costs' als proxy, maar zwarte patiënten hadden minder care door discriminatie.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Postcode correleert met risico. Maar het correleert ook met sociaaleconomische status en etniciteit. Als je postcode gebruikt: efficient maar mogelijk discriminerend. Als je het negeert: minder accuraat en unfair voor low-risk mensen in high-risk areas.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="immobiliën-en-verzekeringen">
+            <h2 class="sector-title">Immobiliën en Verzekeringen</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als AI mensen met buitenlandse namen vaker afwijst, is dat bias of correlation met echte risicofactoren?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Namen, postcodes en andere proxies voor etniciteit leiden tot woningdiscriminatie</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Mensen met 'buitenlandse' namen lager gescoord</li>
+                    <li>Postcode van ouders wordt gebruikt, perpetueert segregatie</li>
+                    <li>AI-beslissingen reproduceren redlining practices</li>
+                    <li>Facial recognition in viewings discrimineert</li>
+                    <li>Credit scores correleren zwaar met ras</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Housing discrimination wordt geautomatiseerd en verborgen</li>
+                    <li>Residential segregation wordt geperpetueerd</li>
+                    <li>Wealth building via homeownership onmogelijk voor minderheden</li>
+                    <li>Generational poverty wordt locked in</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Studie liet zien: exacte zelfde aanvraag, verschillende namen. 'Mohamed' kreeg 30% vaker afwijzing dan 'Jan'. Landlords zeggen: 'we volgen alleen de AI score'. Discrimination by algorithm.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Namen kunnen correleren met creditworthiness door immigratiestatus, language barriers, etc. Maar een naam gebruiken als factor voelt als ethnic profiling. Hoe onderscheid je legitimate statistical patterns van unfair discrimination?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="internationaal-ondernemen">
+            <h2 class="sector-title">Internationaal Ondernemen</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als AI hiring systematisch lokale kandidaten verkiest boven expats, is dat discriminatie of cultural fit optimization?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>AI training op Western data werkt slecht voor rest van wereld</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Hiring AI optimized for Western candidates discrimineert anderen</li>
+                    <li>Cultural differences labeled as 'underperformance' by AI</li>
+                    <li>Language AI werkt vooral voor Engels, benadeelt anderen</li>
+                    <li>Western beauty/fashion/behavior standards encoded in AI</li>
+                    <li>Local talent overlooked because doesn't fit AI profile</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Cultural imperialism via AI</li>
+                    <li>Non-Western candidates systematically disadvantaged</li>
+                    <li>Diversity goals impossible with biased global AI</li>
+                    <li>Local knowledge and skills undervalued</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Global company's AI recruiting consistently ranked Western-educated candidates higher, even for local roles. Asian leadership styles labeled 'non-leadership'. Cultural bias baked into system.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Local hiring kan correleren met cultural understanding, language skills en retention. Maar het kan ook zijn: unconscious bias in data. International companies worstelen met: global fairness vs local optimization.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="marketing">
+            <h2 class="sector-title">Marketing</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Is het discriminatie als AI luxe producten vooral toont aan rijke postcodes?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Algorithmic targeting discrimineert systematisch op basis van ras en klasse</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Luxury producten getoond alleen aan rijke postcodes</li>
+                    <li>Housing ads niet getoond aan minderheden</li>
+                    <li>Credit card offers verschillende op basis van etniciteit proxy's</li>
+                    <li>AI neemt postcode als proxy voor ras en discrimineert</li>
+                    <li>Targeting 'optimalisatie' leidt tot systematische uitsluiting</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Digital redlining: moderne vorm van systemic discrimination</li>
+                    <li>Economic opportunity wordt ongelijk verdeeld</li>
+                    <li>Armere communities krijgen slechtere deals</li>
+                    <li>Zelf-versterkende cycli van ongelijkheid</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Facebook toonde job advertenties voor drivers vooral aan mannen, nurses vooral aan vrouwen. Discriminatie was 'optimalisatie'. Department of Justice forced settlement.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>AI optimaliseert voor conversion. Dat betekent vaak targeting op basis van proxies voor wealth/class. Dit lijkt business efficiency maar kan systematische uitsluiting zijn. Waar ligt de grens tussen smart marketing en discriminatie?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="supply-chain-management">
+            <h2 class="sector-title">Supply Chain Management</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als AI systematisch meer taken geeft aan jongere chauffeurs, is dat ageism of efficiency?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>AI-systemen discrimineren tegen oudere of minder ervaren chauffeurs</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Beste routes gaan naar jongere chauffeurs volgens AI</li>
+                    <li>Algoritmes prefereren 'faster' workers, benadeelt ouderen</li>
+                    <li>AI scoring systeem penaliseert mensen met gezondheids-pauzes</li>
+                    <li>Bias tegen vrouwelijke chauffeurs in performance metrics</li>
+                    <li>Historical data bias: vrouwen en ouderen waren underrepresented</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Age discrimination wordt geautomatiseerd</li>
+                    <li>Arbeidswetten worden omzeild via 'objectieve' AI</li>
+                    <li>Diverse workforce wordt systematisch benadeeld</li>
+                    <li>Self-fulfilling prophecy: bias creëert biased nieuwe data</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Delivery AI geeft systematisch mindere routes aan vrouwelijke chauffeurs omdat historische data laat zien ze 'langzamer' zijn. Werkelijke reden: ze waren toegewezen aan moeilijkere wijken. Bias wordt versterkt.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>AI kan besluiten dat jongere chauffeurs sneller zijn, meer uren maken, of minder ziek zijn. Dat is misschien statistisch waar maar individueel unfair en mogelijk illegal. Hoe weeg je group statistics vs individual fairness?</p>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.nav-menu a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

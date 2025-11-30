@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verantwoordelijkheid-dilemma's per Sector</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #9b59b6 0%, #9b59b6dd 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #9b59b6 0%, #9b59b6dd 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .intro {
+            padding: 40px;
+            background: #f8f9fa;
+            border-bottom: 3px solid #9b59b6;
+        }
+        
+        .intro h2 {
+            color: #9b59b6;
+            margin-bottom: 15px;
+        }
+        
+        .sector-detail {
+            padding: 40px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .sector-detail:last-child {
+            border-bottom: none;
+        }
+        
+        .sector-title {
+            font-size: 2em;
+            color: #9b59b6;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #9b59b6;
+        }
+        
+        .ethical-question {
+            background: linear-gradient(135deg, #9b59b620 0%, #9b59b610 100%);
+            border-left: 5px solid #9b59b6;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .ethical-question h3 {
+            color: #9b59b6;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+        
+        .ethical-question .question-text {
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #333;
+            font-style: italic;
+            line-height: 1.5;
+        }
+        
+        .kernprobleem-box {
+            background: #9b59b615;
+            border: 2px solid #9b59b6;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .kernprobleem-box h4 {
+            color: #9b59b6;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .kernprobleem-box p {
+            font-size: 1.1em;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .section-content {
+            margin: 25px 0;
+        }
+        
+        .section-content h4 {
+            color: #9b59b6;
+            font-size: 1.2em;
+            margin-bottom: 12px;
+        }
+        
+        .key-points {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .key-points li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.7;
+        }
+        
+        .key-points li::before {
+            content: "●";
+            color: #9b59b6;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .concerns-list {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .concerns-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .concerns-list li::before {
+            content: "⚠";
+            position: absolute;
+            left: 0;
+        }
+        
+        .example-box {
+            background: #e8f5e9;
+            border-left: 4px solid #27ae60;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .example-box h5 {
+            color: #27ae60;
+            margin-bottom: 10px;
+            font-style: normal;
+            font-size: 1em;
+        }
+        
+        .trade-off-box {
+            background: #f0f0f0;
+            border-left: 5px solid #666;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .trade-off-box h4 {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .trade-off-box p {
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .nav-menu {
+            background: #2c3e50;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background 0.2s;
+            font-size: 0.9em;
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        ul {
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚖️ Verantwoordelijkheid-dilemma's per Sector</h1>
+            <p>Kernproblemen, ethische vragen en concrete voorbeelden</p>
+        </header>
+        
+        <div class="intro">
+            <h2>Over deze analyse</h2>
+            <p>Deze analyse brengt de belangrijkste verantwoordelijkheid-dilemma's per sector in kaart. Per sector zie je het <strong>kernprobleem</strong>, de <strong>centrale ethische vraag</strong>, de <strong>belangrijkste issues</strong> en een <strong>concreet voorbeeld</strong> uit de praktijk.</p>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="#accountancy-fiscaliteit">Accountancy-Fiscaliteit</a>
+            <a href="#airfreight-logistics">Airfreight Logistics</a>
+            <a href="#applied-data-intelligence">Applied Data Intelligence</a>
+            <a href="#automotive-management">Automotive Management</a>
+            <a href="#business-en-management">Business en Management</a>
+            <a href="#financiën-en-verzekeringen">Financiën en Verzekeringen</a>
+            <a href="#immobiliën-en-verzekeringen">Immobiliën en Verzekeringen</a>
+            <a href="#internationaal-ondernemen">Internationaal Ondernemen</a>
+            <a href="#marketing">Marketing</a>
+            <a href="#supply-chain-management">Supply Chain Management</a>
+        </nav>
+        
+        <div id="details">
+        
+        <div class="sector-detail" id="accountancy-fiscaliteit">
+            <h2 class="sector-title">Accountancy-Fiscaliteit</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als AI fiscaal advies geeft dat achteraf fout blijkt, ben jij als accountant aansprakelijk?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Accountants aansprakelijk voor AI-fouten die ze niet kunnen controleren</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>AI geeft foutief fiscaal advies, wie is liable: accountant of AI-vendor?</li>
+                    <li>Professional responsibility vereist begrip, maar AI is black box</li>
+                    <li>Belastingdienst accepteert geen 'AI deed het' als verweer</li>
+                    <li>Malpractice insurance dekt mogelijk geen AI-gerelateerde fouten</li>
+                    <li>Accountants tekenen voor resultaten die ze niet kunnen verifiëren</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Existentieel probleem: verantwoordelijk voor oncontroleerbare tools</li>
+                    <li>Cliënten verwachten professional judgment, krijgen AI-output</li>
+                    <li>Bij audits moet accountant AI-beslissingen kunnen verdedigen</li>
+                    <li>Beroepsaansprakelijkheid in AI-tijdperk is onduidelijk</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Tax software maakt fout, cliënt krijgt naheffing + boete. Cliënt claimt bij accountant. Accountant claimt bij software vendor. Vendor zegt: 'geen garanties'. Wie betaalt?
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Professionals gebruiken AI als tool. Maar ze tekenen voor het eindresultaat. Als AI een error maakt die ze niet kunnen detecteren, is dat hun fout? Wat is redelijke zorgvuldigheid in AI-era?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="airfreight-logistics">
+            <h2 class="sector-title">Airfreight Logistics</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">In een keten met 50 partijen en 20 AI-systemen, wie is eindverantwoordelijk als het misgaat?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Diffuse verantwoordelijkheid in keten met 50 partijen en AI-systemen</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Lading beschadigd door AI-fout, maar welke van 50 bedrijven is liable?</li>
+                    <li>Bij datalek: wie is verantwoordelijk in supply chain?</li>
+                    <li>Contracten schuiven liability af op zwakste schakel</li>
+                    <li>Verzekeringen dekken geen 'AI-related incidents'</li>
+                    <li>International shipments: different liability rules apply</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Niemand is eindverantwoordelijk in complexe ketenS</li>
+                    <li>Zwakste partij (vaak kleinste) draait op voor alles</li>
+                    <li>Bij grote incidents kan geen enkele partij schade dragen</li>
+                    <li>Klanten hebben geen idee wie aan te spreken</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                High-value lading vermist. 15 bedrijven waren betrokken, 8 AI-systemen gebruikten tracking. Niemand weet wat misging. Elke partij wijst naar de ander. Klant blijft met schade.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Diffuse accountability betekent vaak: niemand is verantwoordelijk. Maar één partij alles laten dragen is unfair. Shared responsibility klinkt goed maar is juridisch vaag. Hoe organiseer je dit?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="applied-data-intelligence">
+            <h2 class="sector-title">Applied Data Intelligence</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Ben je verantwoordelijk voor hoe anderen jouw AI gebruiken?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>AI-ontwikkelaars niet aansprakelijk voor downstream gebruik van hun tools</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Facial recognition gebruikt voor surveillance - developer responsible?</li>
+                    <li>AI gebruikt voor discriminatie - is de maker aansprakelijk?</li>
+                    <li>Developers zeggen: 'wij maken tools, jullie kiezen gebruik'</li>
+                    <li>Dual use probleem: tech kan goed en kwaad gebruikt worden</li>
+                    <li>Geen product liability voor AI zoals bij fysieke producten</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Developers kunnen zich onttrekken aan verantwoordelijkheid</li>
+                    <li>Innovatie argument: 'we kunnen niet voorzien alle toepassingen'</li>
+                    <li>Ethical AI guidelines zijn non-binding</li>
+                    <li>Profit motive overschaduwt responsibility</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Bedrijf ontwikkelt facial recognition. Overheid gebruikt het voor massasurveillance en onderdrukking. Is developer verantwoordelijk? Ze zeggen: 'wij verkopen neutrele technologie'.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>AI developers maken tools die voor veel doeleinden gebruikt kunnen worden. Als iemand het misbruikt, is dat developer responsibility? Hoeveel controle kun en moet je hebben over downstream usage?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="automotive-management">
+            <h2 class="sector-title">Automotive Management</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als een zelfrijdende auto iemand raakt, wie is er schuldig?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Wie is schuldig bij ongeluk met zelfrijdende auto?</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Fatal crash met autonomous vehicle - manufacturer, software maker, or 'driver'?</li>
+                    <li>Bij AI-fout: wie is crimineel liable bij dodelijk ongeluk?</li>
+                    <li>Insurance: wie moet premie betalen en claims uitkeren?</li>
+                    <li>Software updates kunnen nieuwe liability introduceren</li>
+                    <li>Traditional tort law past niet op autonomous systems</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Fundamentele vraag: kan AI strafrechtelijk verantwoordelijk zijn?</li>
+                    <li>Families van slachtoffers hebben geen verhaal</li>
+                    <li>Onduidelijkheid remt adoptie van veiligere autonomous cars</li>
+                    <li>Legal vacuum creëert wild west situatie</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Tesla Autopilot maakt fout, dodelijk ongeluk. Is Tesla aansprakelijk? De software developer? De 'bestuurder' die niet ingreep? Juridische precedenten ontbreken.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Is het de autofabrikant, de AI-ontwikkelaar, de car owner, of de victim die onvoorzichtig overstak? Traditional liability models passen niet op autonome systemen. Nieuwe frameworks zijn nodig.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="business-en-management">
+            <h2 class="sector-title">Business en Management</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als AI een slechte business beslissing neemt, wie is er verantwoordelijk? De AI, de ontwikkelaar, de manager die het gebruikte, of het C-level?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Onduidelijk wie aansprakelijk is als AI slechte business beslissingen neemt</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Manager volgt AI-aanbeveling die tot grote verliezen leidt - wie is schuldig?</li>
+                    <li>AI-gestuurde ontslagen blijken discriminerend - wie draait ervoor op?</li>
+                    <li>Diffuse verantwoordelijkheid: AI vendor, IT, manager, of C-suite?</li>
+                    <li>Juridische verdediging: 'de AI deed het' wordt niet geaccepteerd</li>
+                    <li>Insurance dekt vaak geen AI-gerelateerde fouten</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Accountability gap: iedereen wijst naar de ander</li>
+                    <li>Slachtoffers kunnen verhaal niet halen</li>
+                    <li>Managers durven geen AI-beslissingen te overrulen uit angst</li>
+                    <li>Gebrek aan duidelijkheid remt AI-adoptie</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                AI recruiting tool wijst consistent vrouwen af. Na juridische procedure blijkt bias. Wie is aansprakelijk: het bedrijf dat het kocht, de vendor die het maakte, of de HR manager die het gebruikte?
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Verantwoordelijkheid verdelen over meerdere partijen dilutes accountability. Maar alles bij één persoon leggen is oneerlijk als ze het systeem niet volledig begrijpen. Hoe organiseer je verantwoordelijkheid in AI-tijdperk?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="financiën-en-verzekeringen">
+            <h2 class="sector-title">Financiën en Verzekeringen</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als een AI iemand ten onrechte weigert voor verzekering, wie betaalt de schade?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Onduidelijke aansprakelijkheid bij foutieve AI-beslissingen over verzekeringen</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>AI wijst iemand ten onrechte af, wie compenseert de schade?</li>
+                    <li>Algorithmic pricing resulteert in discriminatie - is verzekeraar liable?</li>
+                    <li>AI maakt berekening fout, klant onderverzekerd - wie betaalt claim?</li>
+                    <li>Automated decisions met grote financiële impact zonder human oversight</li>
+                    <li>Regulators zijn onduidelijk over AI-aansprakelijkheid</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Klanten lijden financiële schade zonder verhaal</li>
+                    <li>Verzekeraars verstoppen zich achter 'objectieve algoritmes'</li>
+                    <li>Professional liability insurance dekt geen AI-fouten</li>
+                    <li>Systemisch risico als iedereen dezelfde foutieve AI gebruikt</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                AI berekent premie verkeerd, persoon is onderverzekerd en verliest huis bij brand. Verzekeraar zegt: 'AI-fout, niet onze schuld'. Wie vergoedt het verlies?
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Verzekeraars vertrouwen op AI voor efficiency. Maar AI maakt fouten. Is de verzekeraar liable voor elke AI-fout? Of accepteren we dat als 'technological limitation'? Kunnen slachtoffers verhaal halen?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="immobiliën-en-verzekeringen">
+            <h2 class="sector-title">Immobiliën en Verzekeringen</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als een pricing algorithm onbedoeld discrimineert, wie is er verantwoordelijk? De data scientist, de business owner, of de executive?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Wie is verantwoordelijk voor discriminerende AI in woningtoegang?</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>AI weigert systematisch minderheden, is verhuurder aansprakelijk?</li>
+                    <li>Property manager zegt: 'wij volgen alleen de AI score'</li>
+                    <li>Scoring bedrijven zeggen: 'wij leveren data, geen beslissingen'</li>
+                    <li>Bij discriminatie claims is liability diffuus</li>
+                    <li>Fair housing laws vs algorithmic decision making</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Systematische uitsluiting zonder consequenties voor iemand</li>
+                    <li>Slachtoffers van AI-discriminatie hebben geen verhaal</li>
+                    <li>Bedrijven kopen AI specifiek om liability te vermijden</li>
+                    <li>Juridische grijze zone moedigt discriminatie aan</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Tenant screening AI wijst disproportioneel minderheden af. Bij rechtszaak wijst verhuurder naar AI-vendor, vendor zegt 'wij adviseren alleen', data provider zegt 'wij leveren data'. Niemand is aansprakelijk.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Niemand wilde discrimineren maar het gebeurde toch door data bias. Is dit een system failure, een data failure, of een human failure? Verantwoordelijkheid toewijzen is essentieel voor verbetering maar juridisch complex.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="internationaal-ondernemen">
+            <h2 class="sector-title">Internationaal Ondernemen</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als AI schade veroorzaakt in een ander land met andere wetten, welke jurisdictie geldt?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Jurisdictie-shopping: wie is aanspreekbaar als AI schade veroorzaakt?</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>AI gehost in land A, gebruikt in land B, schade in land C - welke wet geldt?</li>
+                    <li>Bedrijven structureren opzet om liability te minimaliseren</li>
+                    <li>Slachtoffers kunnen multinational niet aanspreken in eigen land</li>
+                    <li>Verschillende liability standaarden per jurisdictie</li>
+                    <li>Legal arbitrage ondermijnt accountability</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Internationale slachtoffers hebben praktisch geen verhaal</li>
+                    <li>Bedrijven kiezen bewust laagste liability jurisdictie</li>
+                    <li>Enforcement van uitspraken over grenzen is bijna onmogelijk</li>
+                    <li>Ontwikkelingslanden hebben zwakste bescherming</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                AI van US bedrijf discrimineert tegen Afrikaanse consumenten. Slachtoffers kunnen niet in US procederen (geen standing), lokaal geen adequate wetten. Bedrijf is praktisch immune.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>International AI gebruik creëert legal complexity. Wie is aanspreekbaar? Het hoofdkantoor, de lokale subsidiary, de AI vendor? Jurisdiction shopping kan accountability ondermijnen.</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="marketing">
+            <h2 class="sector-title">Marketing</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als AI-targeting discrimineert, ben jij dan schuldig ook al heb je het niet bewust geprogrammeerd?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Niemand wil verantwoordelijkheid nemen voor discriminerende AI-targeting</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>Marketing team zegt: 'wij begrijpen de AI niet, vraag het de leverancier'</li>
+                    <li>AI vendor zegt: 'wij leveren tools, jullie zijn verantwoordelijk voor gebruik'</li>
+                    <li>Platform eigenaars zeggen: 'wij zijn slechts tussenpersoon'</li>
+                    <li>Bij discriminatie claims wijst iedereen naar de ander</li>
+                    <li>Geen duidelijke liability bij geautomatiseerde discriminatie</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Systematische discriminatie zonder consequenties</li>
+                    <li>Bedrijven verstoppen zich achter AI-complexity</li>
+                    <li>Slachtoffers van discriminatie hebben geen verhaal</li>
+                    <li>Perverse incentive: opacity beschermt tegen aansprakelijkheid</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                Facebook's ad platform toont woningadvertenties vooral aan witte mensen. Is Facebook verantwoordelijk, de adverteerder, of 'het algoritme'? Jarenlange juridische strijd zonder duidelijkheid.
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>Marketing teams gebruiken AI-platforms als black boxes. Ze willen de resultaten maar begrijpen de mechanica niet. Als het discrimineert, is dat hun verantwoordelijkheid? Of die van de AI-leverancier?</p>
+            </div>
+        </div>
+        
+        <div class="sector-detail" id="supply-chain-management">
+            <h2 class="sector-title">Supply Chain Management</h2>
+            
+            <div class="ethical-question">
+                <h3>🤔 Centrale Ethische Vraag</h3>
+                <div class="question-text">Als een AI-gestuurd delivery systeem chauffeurs uitput, wie is aansprakelijk? De chauffeur die doorrijdt, het bedrijf, of de AI?</div>
+            </div>
+            
+            <div class="kernprobleem-box">
+                <h4>⚠️ Kernprobleem</h4>
+                <p>Wie is aansprakelijk als AI-optimalisatie chauffeurs uitput of schade veroorzaakt?</p>
+            </div>
+            
+            <div class="section-content">
+                <h4>Belangrijkste Issues</h4>
+                <ul class="key-points">
+                    <li>AI plant onrealistische routes, chauffeur krijgt ongeluk - wie is schuldig?</li>
+                    <li>Algoritme dwingt onveilige beslissingen, management zegt 'volg het systeem'</li>
+                    <li>Chauffeur krijgt burnout door AI-gestuurde workload - employer liable?</li>
+                    <li>AI maakt fout in route planning, dure lading beschadigd - wie betaalt?</li>
+                    <li>Arbeidsrecht vs algorithmic management: juridisch niemandsland</li>
+                </ul>
+            </div>
+            
+            <div class="section-content">
+                <h4>Kernzorgen</h4>
+                <ul class="concerns-list">
+                    <li>Chauffeurs gedwongen kiezen: onveilig rijden of baan verliezen</li>
+                    <li>Bedrijven kunnen verantwoordelijkheid afschuiven op 'objectieve' AI</li>
+                    <li>Bij ongelukken is onduidelijk of mens of AI schuldig is</li>
+                    <li>Verzekeringen weigeren claims: 'AI was in control'</li>
+                </ul>
+            </div>
+            
+            <div class="example-box">
+                <h5>💡 Concreet Voorbeeld</h5>
+                AI-systeem plant route die vereist dat chauffeur 14 uur rijdt zonder adequate pauze. Chauffeur krijgt ongeluk. Rechtszaak: was dit AI's schuld, chauffeur's schuld, of employer's schuld?
+            </div>
+            
+            <div class="trade-off-box">
+                <h4>⚖️ Trade-off & Spanning</h4>
+                <p>AI optimaliseert voor efficiency, mensen maken keuzes. Als het misgaat: is het system design, management oversight, of persoonlijke responsibility? Alle drie zijn betrokken.</p>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.nav-menu a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
