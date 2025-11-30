@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy-dilemma's per Sector - Samenvatting</title>
+    <title>Privacy-dilemma's per Sector - Samenvatting (kort)</title>
     <style>
         * {
             margin: 0;
@@ -32,34 +32,34 @@
         header {
             background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
             color: white;
-            padding: 60px 40px;
+            padding: 40px 30px;
             text-align: center;
         }
         
         header h1 {
-            font-size: 2.8em;
-            margin-bottom: 10px;
+            font-size: 2.4em;
+            margin-bottom: 8px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
         
         header p {
-            font-size: 1.1em;
+            font-size: 1em;
             opacity: 0.9;
         }
         
         .intro {
-            padding: 40px;
+            padding: 25px 30px;
             background: #f8f9fa;
             border-bottom: 3px solid #e74c3c;
         }
         
         .intro h2 {
             color: #e74c3c;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         
         .sector-detail {
-            padding: 40px;
+            padding: 30px;
             border-bottom: 2px solid #e9ecef;
         }
         
@@ -68,77 +68,77 @@
         }
         
         .sector-title {
-            font-size: 2em;
+            font-size: 1.8em;
             color: #e74c3c;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
             border-bottom: 3px solid #e74c3c;
         }
         
         .ethical-question {
             background: linear-gradient(135deg, #ffe5e5 0%, #ffd5d5 100%);
             border-left: 5px solid #e74c3c;
-            padding: 25px;
+            padding: 18px;
             border-radius: 10px;
-            margin-bottom: 25px;
+            margin-bottom: 18px;
         }
         
         .ethical-question h3 {
             color: #c0392b;
-            margin-bottom: 12px;
-            font-size: 1.2em;
+            margin-bottom: 8px;
+            font-size: 1.1em;
         }
         
         .ethical-question .question-text {
-            font-size: 1.2em;
+            font-size: 1.05em;
             font-weight: 500;
             color: #333;
             font-style: italic;
-            line-height: 1.5;
+            line-height: 1.4;
         }
         
         .kernprobleem-box {
             background: #fff5f5;
             border: 2px solid #e74c3c;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
-            margin: 20px 0;
+            margin: 15px 0;
         }
         
         .kernprobleem-box h4 {
             color: #e74c3c;
-            margin-bottom: 10px;
-            font-size: 1.1em;
+            margin-bottom: 5px;
+            font-size: 1em;
         }
         
         .kernprobleem-box p {
-            font-size: 1.1em;
+            font-size: 1.02em;
             font-weight: 500;
             color: #333;
         }
         
         .section-content {
-            margin: 25px 0;
+            margin: 18px 0;
         }
         
         .section-content h4 {
             color: #e74c3c;
-            font-size: 1.2em;
-            margin-bottom: 12px;
+            font-size: 1.05em;
+            margin-bottom: 8px;
         }
         
         .key-points {
             background: #f8f9fa;
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
-            margin: 15px 0;
+            margin: 10px 0;
         }
         
         .key-points li {
-            padding: 10px 0;
-            padding-left: 25px;
+            padding: 6px 0;
+            padding-left: 22px;
             position: relative;
-            line-height: 1.7;
+            line-height: 1.5;
         }
         
         .key-points li::before {
@@ -152,14 +152,14 @@
         .concerns-list {
             background: #fff3cd;
             border-left: 4px solid #ffc107;
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
-            margin: 15px 0;
+            margin: 10px 0;
         }
         
         .concerns-list li {
-            padding: 8px 0;
-            padding-left: 25px;
+            padding: 5px 0;
+            padding-left: 22px;
             position: relative;
         }
         
@@ -172,60 +172,57 @@
         .example-box {
             background: #e8f5e9;
             border-left: 4px solid #27ae60;
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
-            margin: 20px 0;
+            margin: 15px 0;
             font-style: italic;
+            font-size: 0.98em;
         }
         
         .example-box h5 {
             color: #27ae60;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             font-style: normal;
-            font-size: 1em;
+            font-size: 0.98em;
         }
         
         .trade-off-box {
             background: #f0f0f0;
             border-left: 5px solid #666;
-            padding: 20px;
+            padding: 15px;
             border-radius: 8px;
-            margin: 20px 0;
+            margin: 15px 0;
+            font-size: 0.98em;
         }
         
         .trade-off-box h4 {
             color: #666;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        
-        .trade-off-box p {
-            line-height: 1.7;
-            color: #555;
+            margin-bottom: 6px;
+            font-size: 1em;
         }
         
         .nav-menu {
             background: #2c3e50;
-            padding: 15px 30px;
+            padding: 10px 20px;
             position: sticky;
             top: 0;
             z-index: 100;
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         
         .nav-menu a {
             color: white;
             text-decoration: none;
-            padding: 8px 15px;
+            padding: 6px 12px;
             border-radius: 5px;
             transition: background 0.2s;
-            font-size: 0.9em;
+            font-size: 0.85em;
         }
         
         .nav-menu a:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.12);
         }
         
         ul {
@@ -237,12 +234,12 @@
     <div class="container">
         <header>
             <h1>🔒 Privacy-dilemma's per Sector</h1>
-            <p>Kernproblemen, ethische vragen en concrete voorbeelden</p>
+            <p>Korte samenvattingen van kernproblemen, vragen en voorbeelden</p>
         </header>
         
         <div class="intro">
-            <h2>Over deze analyse</h2>
-            <p>Deze analyse brengt de belangrijkste privacy-dilemma's per sector in kaart. Per sector zie je het <strong>kernprobleem</strong>, de <strong>centrale ethische vraag</strong>, de <strong>belangrijkste issues</strong> en een <strong>concreet voorbeeld</strong> uit de praktijk.</p>
+            <h2>Overzicht</h2>
+            <p>Per sector zie je hier het <strong>kernprobleem</strong>, een <strong>centrale ethische vraag</strong>, enkele <strong>belangrijkste privacy-issues</strong> en een <strong>kort voorbeeld</strong>. Dit dient als startpunt voor discussie en verdere analyse.</p>
         </div>
         
         <nav class="nav-menu">
@@ -259,465 +256,435 @@
         </nav>
         
         <div id="details">
-            
+            <!-- Business & Management -->
             <div class="sector-detail" id="business">
                 <h2 class="sector-title">Business en Management</h2>
                 
                 <div class="ethical-question">
-                    <h3>🤔 Centrale Ethische Vraag</h3>
-                    <div class="question-text">Hoever mag een werkgever gaan in het monitoren van werknemers? Wanneer weegt bedrijfsbelang zwaarder dan persoonlijke privacy?</div>
+                    <h3>🤔 Centrale ethische vraag</h3>
+                    <div class="question-text">Hoe ver mag een werkgever gaan in het monitoren van werknemers? Waar stopt controle en begint inbreuk op privacy?</div>
                 </div>
                 
                 <div class="kernprobleem-box">
                     <h4>⚠️ Kernprobleem</h4>
-                    <p>Invasieve monitoring van werknemers zonder duidelijke grenzen</p>
+                    <p>Breed en onduidelijk monitoren van werknemerscommunicatie zonder duidelijke grenzen of noodzaak.</p>
                 </div>
                 
                 <div class="section-content">
-                    <h4>Belangrijkste Privacy-issues</h4>
+                    <h4>Belangrijkste privacy-issues</h4>
                     <ul class="key-points">
-                        <li>24/7 monitoring van alle werknemers-communicatie, inclusief privéberichten</li>
-                        <li>Managers hebben toegang tot alle e-mails en chats zonder voorafgaande melding</li>
-                        <li>Geen transparantie over wat precies wordt gemonitord en door wie</li>
-                        <li>Chilling effect: werknemers durven niet meer authentiek te communiceren</li>
-                        <li>Monitoring data kan gebruikt worden tegen werknemers bij conflicten</li>
+                        <li>Toegang tot e-mails en chats zonder heldere afspraken.</li>
+                        <li>Onzekerheid over wat er precies wordt gemonitord.</li>
+                        <li>Werknemers voelen zich continu bekeken en passen hun gedrag aan.</li>
                     </ul>
                 </div>
                 
                 <div class="section-content">
                     <h4>Kernzorgen</h4>
                     <ul class="concerns-list">
-                        <li>Complete vertrouwensbreuk tussen werkgever en werknemer</li>
-                        <li>Psychologische stress door permanente observatie</li>
-                        <li>Zelfcensuur ondermijnt open bedrijfscultuur</li>
-                        <li>Geen bescherming voor klokkenluiders die kritische zaken willen melden</li>
+                        <li>Verlies van vertrouwen tussen werkgever en werknemer.</li>
+                        <li>Stress en angst om fouten te maken of kritiek te uiten.</li>
+                        <li>Beperkte ruimte voor klokkenluiders en eerlijke feedback.</li>
                     </ul>
                 </div>
                 
                 <div class="example-box">
-                    <h5>💡 Concreet Voorbeeld</h5>
-                    Een werknemer deelt frustraties over management in een 'privé' Slack bericht met een collega. Later ontdekt hij dat zijn manager dit heeft gelezen en gebruikt als reden om hem te passeren bij een promotie.
+                    <h5>💡 Voorbeeld</h5>
+                    Een medewerker uit zich kritisch in een “privé” chatkanaal. De manager leest mee en gebruikt dit later tegen hem bij een promotiebeslissing.
                 </div>
                 
                 <div class="trade-off-box">
-                    <h4>⚖️ Trade-off & Spanning</h4>
-                    <p>Werkgevers willen fraude voorkomen, productiviteit waarborgen en bedrijfsgeheimen beschermen. Maar constante monitoring creëert een cultuur van wantrouwen, kan contraproductief werken, en schendt fundamentele privacy-rechten. Werknemers die zich bekeken voelen presteren vaak slechter, zijn minder loyaal, en durven niet meer authentiek te communiceren.</p>
+                    <h4>⚖️ Spanning</h4>
+                    <p>Bedrijven willen risico's en fraude beperken, maar te vergaande controle tast vertrouwen, welzijn en open communicatie aan.</p>
                 </div>
             </div>
             
+            <!-- Marketing -->
             <div class="sector-detail" id="marketing">
                 <h2 class="sector-title">Marketing</h2>
                 
                 <div class="ethical-question">
-                    <h3>🤔 Centrale Ethische Vraag</h3>
-                    <div class="question-text">Is het ethisch verantwoord om gevoelige gezondheidsdata te gebruiken voor commerciële targeting? Waar ligt de grens tussen personalisatie en manipulatie?</div>
+                    <h3>🤔 Centrale ethische vraag</h3>
+                    <div class="question-text">Is het verantwoord om gezondheidsgegevens te gebruiken voor reclame? Wanneer slaat personalisatie om in manipulatie?</div>
                 </div>
                 
                 <div class="kernprobleem-box">
                     <h4>⚠️ Kernprobleem</h4>
-                    <p>Gebruik van gevoelige gezondheidsdata voor commerciële targeting</p>
+                    <p>Commercieel gebruik van gevoelige gezondheidsdata zonder duidelijke toestemming.</p>
                 </div>
                 
                 <div class="section-content">
-                    <h4>Belangrijkste Privacy-issues</h4>
+                    <h4>Belangrijkste privacy-issues</h4>
                     <ul class="key-points">
-                        <li>Gezondheidsdata wordt gebruikt voor targeted advertising zonder expliciete toestemming</li>
-                        <li>Mensen met chronische aandoeningen worden gestalkt met medicijn-advertenties</li>
-                        <li>Tracking gebeurt zonder medeweten via externe databrokers</li>
-                        <li>Gevoelige informatie wordt zichtbaar gemaakt in advertenties</li>
-                        <li>Emotioneel kwetsbare momenten worden geëxploiteerd voor marketing</li>
+                        <li>Gerichte advertenties op basis van medische zoekgeschiedenis.</li>
+                        <li>Profiteren van emotioneel kwetsbare momenten (ziekte, verlies).</li>
+                        <li>Onzichtbare tracking via databrokers.</li>
                     </ul>
                 </div>
                 
                 <div class="section-content">
                     <h4>Kernzorgen</h4>
                     <ul class="concerns-list">
-                        <li>Stigmatisering van mensen met gezondheidsproblemen</li>
-                        <li>Uitbuiting van kwetsbare mensen op hun laagste punten</li>
-                        <li>Discriminatie op basis van gezondheid wordt genormaliseerd</li>
-                        <li>Privacy van familie wordt ook geschonden (genetische info)</li>
+                        <li>Stigmatisering en ongewenste labels.</li>
+                        <li>Uitbuiting van mensen op kwetsbare momenten.</li>
+                        <li>Gevoelige info over familie en genetica wordt zichtbaar.</li>
                     </ul>
                 </div>
                 
                 <div class="example-box">
-                    <h5>💡 Concreet Voorbeeld</h5>
-                    Een vrouw die net een miskraam heeft gehad wordt acht weken lang gebombardeerd met baby-gerelateerde advertenties omdat algoritmes haar eerdere zoekgedrag gebruiken, zonder te weten dat de situatie is veranderd.
+                    <h5>💡 Voorbeeld</h5>
+                    Iemand die een miskraam heeft gehad blijft wekenlang zwangerschap- en babyadvertenties zien omdat het advertentieprofiel niet wordt aangepast.
                 </div>
                 
                 <div class="trade-off-box">
-                    <h4>⚖️ Trade-off & Spanning</h4>
-                    <p>Gepersonaliseerde marketing kan relevanter en nuttiger zijn voor consumenten, advertenties efficiënter maken, en mensen helpen producten te vinden die ze écht nodig hebben. Maar het gebruik van gezondheidsdata en andere gevoelige informatie voor commerciële doeleinden kan leiden tot stigmatisering, discriminatie, uitbuiting van kwetsbare mensen, en een fundamentele schending van menselijke waardigheid.</p>
+                    <h4>⚖️ Spanning</h4>
+                    <p>Personalisatie maakt reclame relevanter, maar kan tegelijk diep ingrijpen in de persoonlijke levenssfeer en waardigheid aantasten.</p>
                 </div>
             </div>
             
+            <!-- Supply Chain -->
             <div class="sector-detail" id="supply">
                 <h2 class="sector-title">Supply Chain Management</h2>
                 
                 <div class="ethical-question">
-                    <h3>🤔 Centrale Ethische Vraag</h3>
-                    <div class="question-text">Wanneer wordt efficiëntie-monitoring surveillance? Hebben werknemers recht op privacy tijdens werkuren, ook in de vrachtauto?</div>
+                    <h3>🤔 Centrale ethische vraag</h3>
+                    <div class="question-text">Wanneer verandert efficiëntie-monitoring in permanente surveillance van chauffeurs?</div>
                 </div>
                 
                 <div class="kernprobleem-box">
                     <h4>⚠️ Kernprobleem</h4>
-                    <p>24/7 GPS-tracking van chauffeurs zonder toestemming of controle</p>
+                    <p>Continue GPS-tracking van chauffeurs, ook buiten werkmomenten.</p>
                 </div>
                 
                 <div class="section-content">
-                    <h4>Belangrijkste Privacy-issues</h4>
+                    <h4>Belangrijkste privacy-issues</h4>
                     <ul class="key-points">
-                        <li>Chauffeurs worden continu getrackt, ook tijdens pauzes en privétijd</li>
-                        <li>Locatiedata wordt commercieel verkocht aan derden zonder medeweten</li>
-                        <li>Zelfs toiletbezoek is traceerbaar en wordt soms tegen chauffeurs gebruikt</li>
-                        <li>Geen mogelijkheid om tracking tijdelijk uit te schakelen</li>
-                        <li>Monitoring creëert druk om pauzes over te slaan</li>
+                        <li>Geen mogelijkheid om tracking te pauzeren tijdens pauzes.</li>
+                        <li>Locatiegegevens worden soms gedeeld met andere partijen.</li>
+                        <li>Tracking wordt gebruikt om pauzes of rusttijd te bestraffen.</li>
                     </ul>
                 </div>
                 
                 <div class="section-content">
                     <h4>Kernzorgen</h4>
                     <ul class="concerns-list">
-                        <li>Complete afwezigheid van privacy en menselijke waardigheid</li>
-                        <li>Chauffeurs worden behandeld als 'assets' in plaats van mensen</li>
-                        <li>Stalking-risico als tracking data lekt</li>
-                        <li>Psychologische impact van permanente surveillance</li>
-                        <li>Gezondheidsrisico's door overslaan verplichte rustperiodes</li>
+                        <li>Chauffeurs voelen zich gereduceerd tot “objecten” in een systeem.</li>
+                        <li>Psychische druk en risico op onveilig rijgedrag.</li>
+                        <li>Misbruik bij datalekken (stalking, diefstal).</li>
                     </ul>
                 </div>
                 
                 <div class="example-box">
-                    <h5>💡 Concreet Voorbeeld</h5>
-                    Een chauffeur wordt op het matje geroepen omdat zijn GPS laat zien dat hij 15 minuten stil stond terwijl hij naar het toilet was. Hij krijgt te horen dat dit 'onproductieve tijd' is en zijn bonus wordt gekort.
+                    <h5>💡 Voorbeeld</h5>
+                    Een chauffeur verliest een deel van zijn bonus omdat zijn toiletpauze in de trackingsoftware als “onproductieve tijd” verschijnt.
                 </div>
                 
                 <div class="trade-off-box">
-                    <h4>⚖️ Trade-off & Spanning</h4>
-                    <p>GPS tracking en monitoring kunnen veiligheid verbeteren (hulp bij ongelukken), routes optimaliseren, brandstof besparen, diefstal voorkomen, en klanten accurate info geven. Maar constante 24/7 monitoring vernietigt vertrouwen, maakt elke privémoment onmogelijk, behandelt werknemers als machines in plaats van mensen, en kan leiden tot onterechte sancties.</p>
+                    <h4>⚖️ Spanning</h4>
+                    <p>Tracking verhoogt veiligheid en efficiëntie, maar kan ook elke vorm van privacy en autonomie tijdens het werk wegnemen.</p>
                 </div>
             </div>
             
+            <!-- Financiën -->
             <div class="sector-detail" id="finance">
                 <h2 class="sector-title">Financiën en Verzekeringen</h2>
                 
                 <div class="ethical-question">
-                    <h3>🤔 Centrale Ethische Vraag</h3>
-                    <div class="question-text">Mogen verzekeraars externe data inkopen om risico's te berekenen? Is profilering op basis van levensstijl discriminatie of gewoon actuarieel correct?</div>
+                    <h3>🤔 Centrale ethische vraag</h3>
+                    <div class="question-text">Mogen verzekeraars externe data gebruiken om premies te bepalen, als dit leidt tot uitsluiting van bepaalde groepen?</div>
                 </div>
                 
                 <div class="kernprobleem-box">
                     <h4>⚠️ Kernprobleem</h4>
-                    <p>Verborgen profilering via externe data-inkoop voor premiebepaling</p>
+                    <p>Verborgen profilering op basis van ingekochte persoonlijke data.</p>
                 </div>
                 
                 <div class="section-content">
-                    <h4>Belangrijkste Privacy-issues</h4>
+                    <h4>Belangrijkste privacy-issues</h4>
                     <ul class="key-points">
-                        <li>Verzekeraars kopen persoonlijke data in zonder medeweten klanten</li>
-                        <li>Premies worden aangepast op basis van lifestyle data uit sociale media</li>
-                        <li>Gezondheidsdata en fitnesstracker-info bepaalt verzekerbaarheid</li>
-                        <li>Geen transparantie over welke factoren premie beïnvloeden</li>
-                        <li>Discriminatie op basis van postcode en socio-economische status</li>
+                        <li>Gebruik van sociale media en locatie voor premie-berekening.</li>
+                        <li>Fitnesstracker- en gezondheidsdata beïnvloeden verzekerbaarheid.</li>
+                        <li>Geen inzicht in welke factoren de premie bepalen.</li>
                     </ul>
                 </div>
                 
                 <div class="section-content">
                     <h4>Kernzorgen</h4>
                     <ul class="concerns-list">
-                        <li>Menschen met chronische aandoeningen worden systematisch uitgesloten</li>
-                        <li>Solidariteit in verzekeringssysteem verdwijnt</li>
-                        <li>Angst om dokter te bezoeken uit vrees voor hogere premies</li>
-                        <li>Genetische discriminatie binnen families</li>
-                        <li>Arme wijken betalen meer puur op basis van locatie</li>
+                        <li>Mensen met chronische aandoeningen worden benadeeld.</li>
+                        <li>Arme of “risicovolle” wijken betalen structureel meer.</li>
+                        <li>Angst om medische hulp te zoeken uit vrees voor premies.</li>
                     </ul>
                 </div>
                 
                 <div class="example-box">
-                    <h5>💡 Concreet Voorbeeld</h5>
-                    Een gezonde 35-jarige krijgt een hogere zorgverzekeringspremie omdat algoritmes detecteren dat hij in een 'risicovolle' postcode woont, ondanks dat hij zelf gezond leeft.
+                    <h5>💡 Voorbeeld</h5>
+                    Een gezonde klant krijgt een hogere premie enkel omdat hij in een statistisch “risicovolle” buurt woont.
                 </div>
                 
                 <div class="trade-off-box">
-                    <h4>⚖️ Trade-off & Spanning</h4>
-                    <p>Nauwkeurige risicoberekening op basis van uitgebreide data kan leiden tot 'eerlijkere' premies voor sommigen - gezonde mensen betalen minder, rokers meer. Dit stimuleert ook gezond gedrag. Maar het creëert ook een systeem waar mensen met chronische ziektes, genetische aanleg, bepaalde levenstijlen of socio-economische achtergronden systematisch meer betalen of zelfs geweigerd worden. Dit versterkt ongelijkheid.</p>
+                    <h4>⚖️ Spanning</h4>
+                    <p>Data maakt premies nauwkeuriger, maar tast solidariteit en gelijke toegang tot verzekeringen aan.</p>
                 </div>
             </div>
             
+            <!-- Accountancy -->
             <div class="sector-detail" id="accountancy">
                 <h2 class="sector-title">Accountancy-Fiscaliteit</h2>
                 
                 <div class="ethical-question">
-                    <h3>🤔 Centrale Ethische Vraag</h3>
-                    <div class="question-text">Hoe bescherm je vertrouwelijke cliëntdata bij gebruik van moderne AI-tools? Mag efficiëntie ten koste gaan van absolute vertrouwelijkheid?</div>
+                    <h3>🤔 Centrale ethische vraag</h3>
+                    <div class="question-text">Hoe ver mag efficiëntie via AI gaan als vertrouwelijkheid van cliëntgegevens op het spel staat?</div>
                 </div>
                 
                 <div class="kernprobleem-box">
                     <h4>⚠️ Kernprobleem</h4>
-                    <p>Datalekken door onveilig gebruik van AI-tools met cliëntdata</p>
+                    <p>Onbewust delen van vertrouwelijke cliëntdata met externe AI- en cloudsystemen.</p>
                 </div>
                 
                 <div class="section-content">
-                    <h4>Belangrijkste Privacy-issues</h4>
+                    <h4>Belangrijkste privacy-issues</h4>
                     <ul class="key-points">
-                        <li>Accountants uploaden vertrouwelijke cliëntdata naar ChatGPT en andere tools</li>
-                        <li>Cloud services zonder adequate encryptie bevatten gevoelige financiële data</li>
-                        <li>Gebrek aan awareness over risico's van nieuwe AI-tools</li>
-                        <li>Insider trading risico's door brede toegang tot gevoelige informatie</li>
-                        <li>Geen duidelijke procedures voor veilig AI-gebruik</li>
+                        <li>Uploaden van ruwe financiële data naar AI-tools.</li>
+                        <li>Onvoldoende inzicht in waar data wordt opgeslagen.</li>
+                        <li>Gebrek aan richtlijnen voor veilig gebruik van nieuwe technologie.</li>
                     </ul>
                 </div>
                 
                 <div class="section-content">
                     <h4>Kernzorgen</h4>
                     <ul class="concerns-list">
-                        <li>Verlies van beroepsgeheim - kernwaarde van het vak</li>
-                        <li>Juridische aansprakelijkheid bij datalekken is onduidelijk</li>
-                        <li>Concurrentiegevoelige bedrijfsinformatie komt op straat</li>
-                        <li>Reputatieschade kan hele kantoren vernietigen</li>
-                        <li>Cliënten hebben geen idee dat hun data zo behandeld wordt</li>
+                        <li>Aantasting van beroepsgeheim en vertrouwen.</li>
+                        <li>Risico op datalekken en reputatieschade.</li>
+                        <li>Cliënten weten vaak niet wat er met hun data gebeurt.</li>
                     </ul>
                 </div>
                 
                 <div class="example-box">
-                    <h5>💡 Concreet Voorbeeld</h5>
-                    Een accountant plakt financiële data van een cliënt in ChatGPT om snel een analyse te maken. Hij realiseert zich niet dat deze data nu in OpenAI's systemen zit en mogelijk gebruikt wordt voor training.
+                    <h5>💡 Voorbeeld</h5>
+                    Een accountant kopieert jaarcijfers in een AI-chat om een analyse te laten maken, zonder toestemming van de cliënt.
                 </div>
                 
                 <div class="trade-off-box">
-                    <h4>⚖️ Trade-off & Spanning</h4>
-                    <p>AI-tools zoals ChatGPT, cloud services en automatisering kunnen accountancy veel efficiënter maken, fouten reduceren, sneller inzichten bieden, en kosten verlagen. Maar het (vaak onbedoeld) uploaden van cliëntdata naar externe tools brengt enorme risico's mee: datalekken, verlies van beroepsgeheim, juridische aansprakelijkheid, en schade aan de vertrouwensrelatie met cliënten.</p>
+                    <h4>⚖️ Spanning</h4>
+                    <p>AI verhoogt snelheid en kwaliteit, maar kan het fundament van vertrouwen en geheimhouding ondergraven.</p>
                 </div>
             </div>
             
+            <!-- Immobiliën -->
             <div class="sector-detail" id="immobilien">
                 <h2 class="sector-title">Immobiliën en Verzekeringen</h2>
                 
                 <div class="ethical-question">
-                    <h3>🤔 Centrale Ethische Vraag</h3>
-                    <div class="question-text">Hoe gedetailleerd mag profilering zijn bij het beoordelen van woningzoekenden? Wanneer wordt risicobeheer discriminatie?</div>
+                    <h3>🤔 Centrale ethische vraag</h3>
+                    <div class="question-text">Hoe ver mag profilering gaan bij de selectie van huurders en kopers zonder discriminerend te worden?</div>
                 </div>
                 
                 <div class="kernprobleem-box">
                     <h4>⚠️ Kernprobleem</h4>
-                    <p>Extreem gedetailleerde profilering die veel verder gaat dan financiële draagkracht</p>
+                    <p>Zeer gedetailleerde profielen bepalen toegang tot woningen.</p>
                 </div>
                 
                 <div class="section-content">
-                    <h4>Belangrijkste Privacy-issues</h4>
+                    <h4>Belangrijkste privacy-issues</h4>
                     <ul class="key-points">
-                        <li>Volledige financiële geschiedenis, sociale media en postcode bepalen woningtoegang</li>
-                        <li>Algoritmische afwijzingen zonder uitleg of mogelijkheid tot bezwaar</li>
-                        <li>Gebruik van naam en etniciteit als proxy-variabelen</li>
-                        <li>Systematische uitsluiting van bepaalde groepen door biased algoritmes</li>
-                        <li>Geen transparantie over welke factoren leiden tot afwijzing</li>
+                        <li>Gebruik van sociale media, naam en postcode in selectie.</li>
+                        <li>Automatische afwijzingen zonder uitleg.</li>
+                        <li>Fouten in data kunnen kansen duurzaam blokkeren.</li>
                     </ul>
                 </div>
                 
                 <div class="section-content">
                     <h4>Kernzorgen</h4>
                     <ul class="concerns-list">
-                        <li>Vicieuze cirkel: geen huis krijgen → slechtere score → nog moeilijker worden</li>
-                        <li>Discriminatie op basis van achtergrond wordt geautomatiseerd</li>
-                        <li>Mensen hebben geen controle over hun profiel of mogelijkheid tot correctie</li>
-                        <li>Fouten in data zijn levensbepalend</li>
-                        <li>Hele wijken worden gestigmatiseerd</li>
+                        <li>Systematische uitsluiting van bepaalde groepen.</li>
+                        <li>Stigmatisering van wijken en families.</li>
+                        <li>Weinig mogelijkheden om profielen te corrigeren.</li>
                     </ul>
                 </div>
                 
                 <div class="example-box">
-                    <h5>💡 Concreet Voorbeeld</h5>
-                    Een hoogopgeleide professional met vaste baan wordt automatisch afgewezen voor een huurwoning omdat zijn achternaam en postcode van zijn ouders door het algoritme als 'risico' worden gezien.
+                    <h5>💡 Voorbeeld</h5>
+                    Een kandidaat met vaste baan wordt afgewezen omdat zijn achternaam en ouderlijke postcode door het algoritme als “risico” worden gezien.
                 </div>
                 
                 <div class="trade-off-box">
-                    <h4>⚖️ Trade-off & Spanning</h4>
-                    <p>Uitgebreide checks kunnen verhuurders en verkopers beschermen tegen fraude, wanbetaling en schade, en zorgen voor een gezonde woningmarkt. Maar deze checks kunnen ook leiden tot systematische uitsluiting van mensen met migratieachtergrond, lage inkomens, 'verkeerde' postcodes of andere kenmerken - zelfs als ze betrouwbare huurders/kopers zouden zijn. Dit versterkt sociale ongelijkheid.</p>
+                    <h4>⚖️ Spanning</h4>
+                    <p>Screening kan verhuurders beschermen, maar vergroot ook ongelijkheid op de woningmarkt.</p>
                 </div>
             </div>
             
+            <!-- Applied Data Intelligence -->
             <div class="sector-detail" id="data">
                 <h2 class="sector-title">Applied Data Intelligence</h2>
                 
                 <div class="ethical-question">
-                    <h3>🤔 Centrale Ethische Vraag</h3>
-                    <div class="question-text">Wanneer is data scraping diefstal? Mag je publieke data gebruiken voor doeleinden waar mensen niet mee instemden?</div>
+                    <h3>🤔 Centrale ethische vraag</h3>
+                    <div class="question-text">Is het toegestaan om publiek beschikbare data eindeloos te hergebruiken voor AI en analyse, ook als mensen dat nooit zo bedoeld hadden?</div>
                 </div>
                 
                 <div class="kernprobleem-box">
                     <h4>⚠️ Kernprobleem</h4>
-                    <p>Scrapen en gebruiken van persoonlijke data zonder toestemming</p>
+                    <p>Scrapen en combineren van persoonlijke data zonder toestemming of controle.</p>
                 </div>
                 
                 <div class="section-content">
-                    <h4>Belangrijkste Privacy-issues</h4>
+                    <h4>Belangrijkste privacy-issues</h4>
                     <ul class="key-points">
-                        <li>Publieke data wordt gescraped en gebruikt voor AI-training zonder consent</li>
-                        <li>Veel meer informatie verzameld dan mensen ooit publiek bedoelden</li>
-                        <li>Commercialisering van persoonlijke informatie zonder compensatie</li>
-                        <li>Data uit verschillende bronnen wordt gecombineerd tot compleet profiel</li>
-                        <li>Geen mogelijkheid tot opt-out of verwijdering</li>
+                        <li>Publieke profielen worden massaal gekopieerd.</li>
+                        <li>Data uit meerdere bronnen vormt één uitgebreid profiel.</li>
+                        <li>Weinig mogelijkheden om data te laten verwijderen.</li>
                     </ul>
                 </div>
                 
                 <div class="section-content">
                     <h4>Kernzorgen</h4>
                     <ul class="concerns-list">
-                        <li>Volledige controle over eigen informatie verloren</li>
-                        <li>Data kan in toekomst tegen je gebruikt worden op onverwachte manieren</li>
-                        <li>Permanente digitale voetafdruk die nooit gewist kan worden</li>
-                        <li>Privacy van familie en vrienden ook geschonden door associatie</li>
-                        <li>Toepassingen waar nooit mee ingestemd is</li>
+                        <li>Mensen verliezen grip op hun digitale voetafdruk.</li>
+                        <li>Data kan later gebruikt worden voor nieuwe, ongewenste doelen.</li>
+                        <li>Ook vrienden en familie worden indirect geraakt.</li>
                     </ul>
                 </div>
                 
                 <div class="example-box">
-                    <h5>💡 Concreet Voorbeeld</h5>
-                    Een persoon ontdekt dat zijn GitHub-code, LinkedIn profiel, en oude forum posts zijn gecombineerd in een AI-training dataset en nu worden verkocht, zonder dat hij ooit toestemming gaf.
+                    <h5>💡 Voorbeeld</h5>
+                    Iemand merkt dat zijn oude posts en code in een commerciële AI-dataset zijn beland, zonder dat hij dat ooit heeft goedgekeurd of ervoor wordt vergoed.
                 </div>
                 
                 <div class="trade-off-box">
-                    <h4>⚖️ Trade-off & Spanning</h4>
-                    <p>Data scraping maakt AI-ontwikkeling, wetenschappelijk onderzoek, marktanalyse en innovatie mogelijk. Het democratiseert toegang tot informatie en maakt nieuwe diensten mogelijk. Maar het ondermijnt de controle die mensen hebben over hun eigen informatie, kan leiden tot onverwachte en ongewenste toepassingen, en schendt de verwachting dat 'publiek' niet automatisch betekent 'vrij te gebruiken voor elk doel'.</p>
+                    <h4>⚖️ Spanning</h4>
+                    <p>Datagebruik stimuleert innovatie, maar zet persoonlijke autonomie en redelijke verwachtingen van privacy onder druk.</p>
                 </div>
             </div>
             
+            <!-- Internationaal ondernemen -->
             <div class="sector-detail" id="international">
                 <h2 class="sector-title">Internationaal Ondernemen</h2>
                 
                 <div class="ethical-question">
-                    <h3>🤔 Centrale Ethische Vraag</h3>
-                    <div class="question-text">Mogen internationale bedrijven verschillende privacy-standaarden hanteren per regio? Zijn werknemers buiten de EU minder waard?</div>
+                    <h3>🤔 Centrale ethische vraag</h3>
+                    <div class="question-text">Mag een bedrijf werknemers in verschillende landen verschillende niveaus van privacybescherming geven?</div>
                 </div>
                 
                 <div class="kernprobleem-box">
                     <h4>⚠️ Kernprobleem</h4>
-                    <p>Twee-klassen systeem: EU-werknemers krijgen privacybescherming, anderen niet</p>
+                    <p>Twee-klassen systeem: sterke bescherming in de EU, zwakke elders.</p>
                 </div>
                 
                 <div class="section-content">
-                    <h4>Belangrijkste Privacy-issues</h4>
+                    <h4>Belangrijkste privacy-issues</h4>
                     <ul class="key-points">
-                        <li>Werknemers buiten EU krijgen veel minder privacy-rechten</li>
-                        <li>Data van niet-EU werknemers kan verkocht worden in landen met zwakke wetgeving</li>
-                        <li>Wereldwijde tracking zonder uniforme standaarden of transparantie</li>
-                        <li>Geen duidelijke verantwoordelijkheid bij internationale datatransfers</li>
-                        <li>Werknemers in ontwikkelingslanden hebben geen verhaal</li>
+                        <li>Werknemers buiten de EU worden strakker gemonitord.</li>
+                        <li>Data wordt opgeslagen of verkocht in landen met zwakkere wetgeving.</li>
+                        <li>Onheldere verantwoordelijkheid bij internationale datastromen.</li>
                     </ul>
                 </div>
                 
                 <div class="section-content">
                     <h4>Kernzorgen</h4>
                     <ul class="concerns-list">
-                        <li>Fundamentele ongelijkheid op basis van geografische locatie</li>
-                        <li>Privacy wordt behandeld als privilege in plaats van mensenrecht</li>
-                        <li>Uitbuiting van werknemers in landen met zwakke wetgeving</li>
-                        <li>Race to the bottom: bedrijven kiezen laagste standaard</li>
-                        <li>Moreel probleem binnen organisatie: 'zijn sommige mensen minder waard?'</li>
+                        <li>Ongelijke behandeling op basis van locatie.</li>
+                        <li>Privacy als “luxe” voor rijke regio's.</li>
+                        <li>Meer risico op uitbuiting in landen met zwakke regels.</li>
                     </ul>
                 </div>
                 
                 <div class="example-box">
-                    <h5>💡 Concreet Voorbeeld</h5>
-                    Een multinational monitort European employees volgens GDPR maar verkoopt tracking data van Aziatische werknemers aan data brokers omdat lokale wetgeving dat toestaat.
+                    <h5>💡 Voorbeeld</h5>
+                    Een multinational verkoopt gedragsdata van Aziatische werknemers, terwijl dezelfde praktijken bij Europese werknemers verboden zijn.
                 </div>
                 
                 <div class="trade-off-box">
-                    <h4>⚖️ Trade-off & Spanning</h4>
-                    <p>Uniforme wereldwijde privacy-standaarden zijn operationeel complex en kostbaar (verschillende wetten, culturen, infrastructuur, compliance kosten). Maar verschillende behandeling van werknemers op basis van hun locatie creëert een ethisch problematisch twee-klassen systeem. Het suggereert dat privacy een privilege is voor rijke landen, niet een universeel mensenrecht.</p>
+                    <h4>⚖️ Spanning</h4>
+                    <p>Wereldwijde harmonisatie kost moeite en geld, maar verschillende standaarden creëren een moreel problematische hiërarchie van rechten.</p>
                 </div>
             </div>
             
+            <!-- Automotive -->
             <div class="sector-detail" id="automotive">
                 <h2 class="sector-title">Automotive Management</h2>
                 
                 <div class="ethical-question">
-                    <h3>🤔 Centrale Ethische Vraag</h3>
-                    <div class="question-text">Wie is eigenaar van de data die je auto genereert? Mag een autofabrikant inzicht in je leven verkopen aan derden?</div>
+                    <h3>🤔 Centrale ethische vraag</h3>
+                    <div class="question-text">Van wie is de data die een auto verzamelt, en in hoeverre mag die data worden doorverkocht of gedeeld?</div>
                 </div>
                 
                 <div class="kernprobleem-box">
                     <h4>⚠️ Kernprobleem</h4>
-                    <p>Connected cars verzamelen excessieve data zonder controle voor eigenaar</p>
+                    <p>Connected cars verzamelen veel data zonder echte keuzevrijheid voor de bestuurder.</p>
                 </div>
                 
                 <div class="section-content">
-                    <h4>Belangrijkste Privacy-issues</h4>
+                    <h4>Belangrijkste privacy-issues</h4>
                     <ul class="key-points">
-                        <li>Continue tracking van locatie, gesprekken en rijgedrag</li>
-                        <li>Onduidelijk wie eigenaar is van auto-data: bestuurder of fabrikant?</li>
-                        <li>Data wordt gebruikt voor verzekeringspremies zonder voorafgaande toestemming</li>
-                        <li>Geen mogelijkheid om dataverzameling uit te schakelen</li>
-                        <li>Gesprekken in auto kunnen worden opgenomen</li>
+                        <li>Continue tracking van locatie en rijgedrag.</li>
+                        <li>Onduidelijkheid over eigenaarschap van voertuigdata.</li>
+                        <li>Gebruik van data voor verzekeringspremies of juridische procedures.</li>
                     </ul>
                 </div>
                 
                 <div class="section-content">
                     <h4>Kernzorgen</h4>
                     <ul class="concerns-list">
-                        <li>Auto was één van laatste privé-ruimtes, nu ook onder surveillance</li>
-                        <li>Stalking risico als locatiedata lekt of gehackt wordt</li>
-                        <li>Discriminatie door verzekeraars op basis van rijgedrag</li>
-                        <li>Data kan gebruikt worden in juridische procedures</li>
-                        <li>Geen vrijheid van beweging zonder registratie</li>
+                        <li>De auto als laatste “privé-ruimte” verdwijnt.</li>
+                        <li>Risico op misbruik bij hacks of datalekken.</li>
+                        <li>Discriminatie op basis van rijprofielen.</li>
                     </ul>
                 </div>
                 
                 <div class="example-box">
-                    <h5>💡 Concreet Voorbeeld</h5>
-                    Een bestuurder krijgt plotseling hogere autoverzekering omdat zijn connected car data laat zien dat hij soms te hard rijdt op de snelweg, ook al heeft hij nooit een boete gehad.
+                    <h5>💡 Voorbeeld</h5>
+                    De verzekeringspremie stijgt omdat de auto registreert dat iemand geregeld enkele kilometers per uur te hard rijdt, ondanks het uitblijven van boetes.
                 </div>
                 
                 <div class="trade-off-box">
-                    <h4>⚖️ Trade-off & Spanning</h4>
-                    <p>Connected car data kan veiligheid enorm verbeteren (automatische noodoproep bij ongeluk), onderhoud optimaliseren (voorspellend), brandstof besparen, innovatie mogelijk maken (zelfrijdende auto's), en diensten verbeteren. Maar continue monitoring van locatie, gesprekken, rijgedrag en andere data in je eigen auto - één van de laatste privé-ruimtes - voelt als fundamentele inbreuk.</p>
+                    <h4>⚖️ Spanning</h4>
+                    <p>Data kan veiligheid en onderhoud verbeteren, maar legt tegelijk elke rit vast en beperkt anonieme verplaatsing.</p>
                 </div>
             </div>
             
+            <!-- Airfreight Logistics -->
             <div class="sector-detail" id="logistics">
                 <h2 class="sector-title">Airfreight Logistics</h2>
                 
                 <div class="ethical-question">
-                    <h3>🤔 Centrale Ethische Vraag</h3>
-                    <div class="question-text">Rechtvaardigt supply chain complexiteit het gebrek aan databeveiliging? Wie is verantwoordelijk als er te veel partijen betrokken zijn?</div>
+                    <h3>🤔 Centrale ethische vraag</h3>
+                    <div class="question-text">Hoe organiseer je databeveiliging in een complexe keten met vele partijen, zonder dat privacy het zwakste punt wordt?</div>
                 </div>
                 
                 <div class="kernprobleem-box">
                     <h4>⚠️ Kernprobleem</h4>
-                    <p>Zwakke beveiliging door gefragmenteerde supply chain met tientallen partijen</p>
+                    <p>Gefragmenteerde keten waarin veel partijen persoonsgegevens zien en delen.</p>
                 </div>
                 
                 <div class="section-content">
-                    <h4>Belangrijkste Privacy-issues</h4>
+                    <h4>Belangrijkste privacy-issues</h4>
                     <ul class="key-points">
-                        <li>Te veel partijen hebben toegang tot persoonsgegevens</li>
-                        <li>Onduidelijke verantwoordelijkheid bij datalekken</li>
-                        <li>Tracking data van chauffeurs wordt commercieel verkocht</li>
-                        <li>Geen end-to-end encryptie in de data-uitwisseling</li>
-                        <li>Elk zwak punt in keten is beveiligingsrisico</li>
+                        <li>Veel bedrijven hebben toegang tot dezelfde klant- en trackingdata.</li>
+                        <li>Zwakke schakels maken de hele keten kwetsbaar.</li>
+                        <li>Onzekerheid over wie verantwoordelijk is bij een datalek.</li>
                     </ul>
                 </div>
                 
                 <div class="section-content">
                     <h4>Kernzorgen</h4>
                     <ul class="concerns-list">
-                        <li>Bij datalek is onduidelijk wie verantwoordelijk is</li>
-                        <li>Complete supply chain kwetsbaar voor cyberaanvallen</li>
-                        <li>Persoonlijke data van klanten en werknemers fundamenteel onveilig</li>
-                        <li>Race to the bottom qua security (goedkoopste wint)</li>
-                        <li>Geen mogelijkheid voor individuen om zich te beschermen</li>
+                        <li>Gebrek aan overzicht voor betrokken personen.</li>
+                        <li>Grote impact van één lek op klanten en werknemers.</li>
+                        <li>Neiging om te besparen op beveiliging vanwege kosten.</li>
                     </ul>
                 </div>
                 
                 <div class="example-box">
-                    <h5>💡 Concreet Voorbeeld</h5>
-                    Een pakket wordt getrackt door 15 verschillende bedrijven in de luchtvaart supply chain. Eén ervan heeft zwakke security en lekt alle tracking data, maar niemand weet wie verantwoordelijk is.
+                    <h5>💡 Voorbeeld</h5>
+                    Een van de vele logistieke partners heeft slechte beveiliging, waardoor tracking- en persoonsgegevens uitlekken. Het blijft onduidelijk wie aansprakelijk is.
                 </div>
                 
                 <div class="trade-off-box">
-                    <h4>⚖️ Trade-off & Spanning</h4>
-                    <p>Internationale luchtvaart supply chains zijn extreem complex met tientallen partijen (vliegmaatschappijen, handlers, douane, expediteurs, beveiligingsbedrijven). Data-uitwisseling is essentieel voor efficiënte en veilige logistiek. Maar deze fragmentatie maakt het bijna onmogelijk om sterke databescherming te garanderen, creëert veel aanvalsvectoren, en maakt verantwoordelijkheid diffuus.</p>
+                    <h4>⚖️ Spanning</h4>
+                    <p>Efficiënte internationale logistiek vereist intensieve data-uitwisseling, maar maakt het tegelijk moeilijk om sterke, uniforme privacybescherming te garanderen.</p>
                 </div>
             </div>
-            
         </div>
     </div>
 
